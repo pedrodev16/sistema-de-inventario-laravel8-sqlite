@@ -12,11 +12,8 @@
         }
     </style>
 
-    <li class="nav-item">
-        <a class="nav-link " href="{{ route('categorias.index') }}">Vorver</a>
-    </li>
 
-    <h1 class="text-center"> Registro</h1>
+    <h3 class="text-center mt-5"> Registro De Categoria</h3>
 
     <div class="container">
         <div class="row justify-content-center">
