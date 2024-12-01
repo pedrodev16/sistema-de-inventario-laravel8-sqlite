@@ -14,7 +14,7 @@
             <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Tabla de Categorias</h4>
+                        <h4 class="header-title">Tabla de Marcas</h4>
                         <a class="btn btn-rounded btn-primary mb-3" href="{{ url('marcas/create') }}">Nuevo Registro</a>
                         @if (session('success'))
                             <div class="alert alert-success">
