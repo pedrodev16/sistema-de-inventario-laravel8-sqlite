@@ -28,7 +28,7 @@
                                         <th>id</th>
                                         <th>Nombre</th>
                                         <th>dia de reg</th>
-                                        <th>User</th>
+                                        <th>User R</th>
                                         <th>acc</th>
                                     </tr>
                                 </thead>
@@ -38,17 +38,20 @@
                                             <tr>
                                                 <td>{{ $lista->id }}</td>
                                                 <td>{{ $lista->nombre }}</td>
-                                                <td> 123123 </td>
+                                                <td> {{ $lista->created_at }} </td>
                                                 <td>{{ $lista->user_c->name }}</td>
-                                                <td> <a name="" id="" class="btn btn-primary"
-                                                        href="{{ url('categorias/' . $lista->id . '/edit') }}"
-                                                        role="button">Edit</a>
-                                                    <form method="post"
-                                                        action="{{ route('categorias.destroy', $lista->id) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">DEL</button>
-                                                    </form>
+                                                <td>
+                                                    <div class="row">
+                                                        <a name="" id="" class="btn btn-primary"
+                                                            href="{{ url('categorias/' . $lista->id . '/edit') }}"
+                                                            role="button">Edit</a>
+                                                        <form method="post"
+                                                            action="{{ route('categorias.destroy', $lista->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">DEL</button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endif
