@@ -54,43 +54,18 @@
                                         class="ti-dashboard"></i><span>dashboard</span></a>
 
                             </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i
-                                        class="ti-layout-sidebar-left"></i><span>Categorias
-                                    </span></a>
-                                <ul class="collapse">
-                                    <li><a href="{{ route('categorias.index') }}">Lista</a></li>
-                                    <li><a href="{{ route('categorias.create') }}">Registrar Nuevo</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i
-                                        class="ti-layout-sidebar-left"></i><span>Proveedores
-                                    </span></a>
-                                <ul class="collapse">
-                                    <li><a href="{{ route('proveedor.index') }}">Lista</a></li>
-                                    <li><a href="{{ route('proveedor.create') }}">Registrar Nuevo</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i
-                                        class="ti-pie-chart"></i><span>Marcas</span></a>
-                                <ul class="collapse">
-                                    <li><a href="{{ route('marcas.index') }}">Lista</a></li>
-                                    <li><a href="{{ route('marcas.create') }}">Registrar Nuevo</a></li>
 
-                                </ul>
-                            </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i>
-                                    <span>Usuarios Admin</span></a>
+                                    <span>Administración</span></a>
                                 <ul class="collapse">
-                                    <li><a href="{{ route('usuarios.index') }}">Lista</a></li>
-                                    <li><a href="{{ route('registro.index') }}">Registrar Nuevo</a></li>
+                                    <li><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
+                                    <li><a href="{{ route('categorias.index') }}">Categorias</a></li>
+                                    <li><a href="{{ route('marcas.index') }}">Marcas</a></li>
+                                    <li><a href="{{ route('proveedor.index') }}">Proveedores</a></li>
 
                                 </ul>
                             </li>
-
 
                     </nav>
                 </div>
