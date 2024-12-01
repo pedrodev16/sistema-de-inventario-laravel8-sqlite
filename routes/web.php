@@ -4,6 +4,7 @@ use App\Http\Controllers\categoriasController;
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\marcasController;
+use App\Http\Controllers\proveedorController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\Usuarios;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('categorias', categoriasController::class);
     Route::resource('marcas', marcasController::class);
+    Route::resource('proveedor', proveedorController::class);
 });
 
 Route::get('/salir', [LoginController::class, 'salir'])->name('login.salir');

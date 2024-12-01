@@ -65,6 +65,15 @@
                             </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i
+                                        class="ti-layout-sidebar-left"></i><span>Proveedores
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="{{ route('proveedor.index') }}">Lista</a></li>
+                                    <li><a href="{{ route('proveedor.create') }}">Registrar Nuevo</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i
                                         class="ti-pie-chart"></i><span>Marcas</span></a>
                                 <ul class="collapse">
                                     <li><a href="{{ route('marcas.index') }}">Lista</a></li>
