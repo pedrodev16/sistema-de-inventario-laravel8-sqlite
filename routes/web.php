@@ -4,8 +4,12 @@ use App\Http\Controllers\categoriasController;
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\marcasController;
+use App\Http\Controllers\producto;
+use App\Http\Controllers\productos;
+use App\Http\Controllers\Productoscontroller;
 use App\Http\Controllers\proveedorController;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\stock;
 use App\Http\Controllers\Usuarios;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LoginController::class, 'index'])->name('login.index');
 
-Route::get('/home', [LoginController::class, 'index'])->name('login.index');
+// Route::get('/home', [LoginController::class, 'index'])->name('login.index');
 
 
 Route::middleware(['guest'])->group(function () {
@@ -55,9 +59,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Us-del/{id}', [Usuarios::class, 'elimina'])->name('Usuario.del');
     Route::post('/Us-update/{id}', [Usuarios::class, 'update'])->name('Usuario.update');
 
+    Route::get('/stock', [stock::class, 'index'])->name('stock.index');
+    Route::get('/productos', [productos::class, 'index'])->name('productos.index');
+
+    Route::get('/carrito', function () {
+        return view('carrito.index');
+    })->name('carrito.index');;
+
     Route::resource('categorias', categoriasController::class);
     Route::resource('marcas', marcasController::class);
     Route::resource('proveedor', proveedorController::class);
+    Route::resource('producto', producto::class);
+    //Route::post('productos_r', [Productoscontroller::class, 'store'])->name('producto.r');
 });
 
 Route::get('/salir', [LoginController::class, 'salir'])->name('login.salir');

@@ -1,20 +1,19 @@
 @extends('layout.app')
 
-@section('title', 'proveedores')
+@section('title', 'Bienvenido ')
 
 @section('content')
 
-
     <div class="row">
         <div class="col-md-9">
-            @livewire('proveedores.proveedores-list')
+            @livewire('stock.stock-list')
         </div>
         <div class="col-md-3">
             @if (session('error'))
                 <div class="alert alert-danger"> {{ session('error') }} </div>
             @endif
 
-            @livewire('proveedores.formulario-proveedor')
+            @livewire('stock.stockform')
 
 
         </div>
@@ -22,4 +21,9 @@
 
 
 
-    @endsection
+
+    </div>
+
+
+
+@endsection

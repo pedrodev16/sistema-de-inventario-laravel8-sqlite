@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -26,6 +27,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- modernizr css -->
     <script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+
+
+    @livewireStyles
+
 </head>
 
 
@@ -37,41 +43,10 @@
 
     <div class="page-container">
 
-        <div class="sidebar-menu">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <a href="index.html">C/INVENTARIO
-                        {{-- <img src="assets/images/icon/logo.png" alt="logo"> --}}
-                    </a>
-                </div>
-            </div>
-            <div class="main-menu">
-                <div class="menu-inner">
-                    <nav>
-                        <ul class="metismenu" id="menu">
-                            <li class="active">
-                                <a href="{{ route('dashboard') }}"><i
-                                        class="ti-dashboard"></i><span>dashboard</span></a>
 
-                            </li>
+        @livewire('navegacion.menu.menupanel')
 
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i>
-                                    <span>Administración</span></a>
-                                <ul class="collapse">
-                                    <li><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
-                                    <li><a href="{{ route('categorias.index') }}">Categorias</a></li>
-                                    <li><a href="{{ route('marcas.index') }}">Marcas</a></li>
-                                    <li><a href="{{ route('proveedor.index') }}">Proveedores</a></li>
 
-                                </ul>
-                            </li>
-
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- sidebar menu area end -->
         <!-- main content area start -->
         <div class="main-content">
             <!-- header area start -->
@@ -96,6 +71,11 @@
                         <ul class="notification-area pull-right">
                             <li id="full-view"><i class="ti-fullscreen"></i></li>
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
+
+
+                            @livewire('carrito.carrito-notifi')
+
+
                             <li class="dropdown">
                                 <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
                                     <span>2</span>
@@ -158,6 +138,15 @@
                                     </div>
                                 </div>
                             </li>
+
+
+
+
+
+
+
+
+
                             <li class="dropdown">
                                 <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
                                 <div class="dropdown-menu notify-box nt-enveloper-box">
@@ -487,7 +476,7 @@
 
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
@@ -507,14 +496,22 @@
     <!-- all pie chart -->
     <script src="{{ asset('assets/js/pie-chart.js') }}"></script>
     <!-- others plugins -->
-
-
+    <!-- start amcharts -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+    <script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <!-- all line chart activation -->
+    @livewireScripts
     <!-- Start datatable js -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
     <!-- others plugins -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
