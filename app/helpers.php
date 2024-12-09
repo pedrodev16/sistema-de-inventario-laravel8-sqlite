@@ -4,10 +4,7 @@ use App\Models\Empresa;
 
 
 
-function porsentaje($valor, $porcentaje)
-{
-    return $valor * $porcentaje / 100;
-}
+
 function convertir($cost)
 {
     $empresa = Empresa::first();
@@ -26,12 +23,12 @@ function calculos_producto($productos)
     }
     $precioDolar = $empresa->precio_dolar;
     $por_iv = (float) $empresa->porcentaje_iva;
-    $por_g = (float) $empresa->porcentaje_ganacia_tienda;
+
     $mer_l = (float) $empresa->porcentaje_mercadolibre;
-    return $productos->map(function ($producto) use ($precioDolar, $por_iv, $mer_l, $por_g) {
+    return $productos->map(function ($producto) use ($precioDolar, $por_iv, $mer_l) {
 
         $iva = porsentaje($producto->costo, $por_iv);
-        $p_venta = porsentaje($producto->costo, $por_g);
+        $p_venta = porsentaje($producto->costo, $producto->porcentaje_ganacia_tienda);
         $merc_l = porsentaje($producto->costo, $mer_l);
 
 
@@ -45,4 +42,10 @@ function calculos_producto($productos)
         $producto->costo_venta_bs = number_format(convertir($total), 2, ',', '.');
         return $producto;
     });
+}
+
+
+function porsentaje($valor, $porcentaje)
+{
+    return $valor * $porcentaje / 100;
 }

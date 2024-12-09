@@ -19,7 +19,7 @@ class CreateProductosTable extends Migration
             $table->text('descripcion');
             $table->string('imagen');
             $table->decimal('costo', 8, 2);
-
+            $table->decimal('porcentaje_ganacia_tienda', 5, 2);
             $table->string('codigo')->unique();
 
 

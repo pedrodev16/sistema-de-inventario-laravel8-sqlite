@@ -24,6 +24,7 @@ class FormularioProduct extends Component
     public $categoria;
     public $marca;
     public $codigo;
+    public $porcentaje_ganacia_tienda;
 
     public $proveedores;
     public $categorias;
@@ -34,6 +35,7 @@ class FormularioProduct extends Component
         'descripcion' => 'required|string',
         'nuevaImagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'costo' => 'required|numeric',
+        'porcentaje_ganacia_tienda' => 'required|numeric|min:0|max:100',
         'proveedor' => 'required',
         'categoria' => 'required',
         'marca' => 'required',
@@ -57,6 +59,7 @@ class FormularioProduct extends Component
         $this->descripcion = $producto->descripcion;
         $this->imagen = $producto->imagen;
         $this->costo = $producto->costo;
+        $this->porcentaje_ganacia_tienda = $producto->porcentaje_ganacia_tienda;
         $this->proveedor = $producto->proveedor_id;
         $this->categoria = $producto->categorias_id;
         $this->marca = $producto->marcas_id;
@@ -70,6 +73,7 @@ class FormularioProduct extends Component
             'descripcion' => 'required|string',
             'nuevaImagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'costo' => 'required|numeric',
+            'porcentaje_ganacia_tienda' => 'required|numeric|min:0|max:100',
             'proveedor' => 'required',
             'categoria' => 'required',
             'marca' => 'required',
@@ -90,6 +94,7 @@ class FormularioProduct extends Component
                 'descripcion' => $this->descripcion,
                 'imagen' => $data['imagen'],
                 'costo' => $this->costo,
+                'porcentaje_ganacia_tienda' => $this->porcentaje_ganacia_tienda,
                 'proveedor_id' => $this->proveedor,
                 'categorias_id' => $this->categoria,
                 'marcas_id' => $this->marca,
@@ -104,6 +109,7 @@ class FormularioProduct extends Component
                 'descripcion' => $this->descripcion,
                 'imagen' => $path,
                 'costo' => $this->costo,
+                'porcentaje_ganacia_tienda' => $this->porcentaje_ganacia_tienda,
                 'proveedor_id' => $this->proveedor,
                 'categorias_id' => $this->categoria,
                 'marcas_id' => $this->marca,
@@ -122,7 +128,7 @@ class FormularioProduct extends Component
         }
 
         $this->emit('renderlist');
-        $this->reset(['nombre', 'descripcion', 'nuevaImagen', 'costo', 'proveedor', 'categoria', 'marca', 'codigo', 'productoId', 'imagen']);
+        $this->reset(['nombre', 'descripcion', 'nuevaImagen', 'costo', 'porcentaje_ganacia_tienda', 'proveedor', 'categoria', 'marca', 'codigo', 'productoId', 'imagen']);
     }
 
     public function render()

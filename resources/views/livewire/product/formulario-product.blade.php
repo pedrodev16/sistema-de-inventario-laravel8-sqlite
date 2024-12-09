@@ -12,13 +12,7 @@
 
             <form wire:submit.prevent="save">
                 <!-- Mostrar loader durante el envío -->
-                <div wire:loading>
-                    <div>procesando...</div>
-                </div>
 
-                <!-- Contenido del formulario -->
-                <div wire:loading.remove>
-                </div>
                 <div class="mb-3 mt-5">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" wire:model="nombre">
@@ -51,8 +45,19 @@
 
                 <div class="mb-3">
                     <label for="costo" class="form-label">Costo</label>
-                    <input type="number" class="form-control" id="costo" wire:model="costo">
+                    <input type="number" step="0.01" class="form-control" id="costo" wire:model="costo">
                     @error('costo')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+
+                <div class="mb-3">
+                    <label for="porcentaje_ganacia_tienda" class="form-label">Porcentaje Ganancia Tienda</label>
+                    <input type="number" step="0.01" class="form-control" id="porcentaje_ganacia_tienda"
+                        wire:model="porcentaje_ganacia_tienda">
+                    @error('porcentaje_ganacia_tienda')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>

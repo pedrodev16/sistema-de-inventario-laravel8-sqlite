@@ -63,7 +63,11 @@
 
                     </tbody>
                 </table>
-
+                @if (count($productos) < 1)
+                    <div class="alert alert-info" role="alert">
+                        NO TIENE PRODUCTOS REGISTRADOS
+                    </div>
+                @endif
 
 
 

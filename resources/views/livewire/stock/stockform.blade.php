@@ -21,7 +21,10 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Actualizar Stock</button>
+                @if ($stockId)
+                    <button type="submit" class="btn btn-primary">Actualizar Stock</button>
+                @endif
+
             </form>
         </div>
     </div>

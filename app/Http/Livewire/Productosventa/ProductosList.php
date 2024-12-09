@@ -15,6 +15,9 @@ class ProductosList extends Component
     public $mensajeError;
     public $empresa;
 
+
+    protected $rules = ['productos.*.porcentaje_ganacia_tienda' => 'required|numeric|min:0|max:100',];
+
     public function mount()
     {
         $this->empresa = Empresa::where('id', 1)->get();
@@ -25,12 +28,12 @@ class ProductosList extends Component
     public function categoriaSeleccionada($categoriaId)
     {
         $this->categoriaId = $categoriaId;
-        $this->productos = productos::where('categorias_id', $categoriaId)->get();
+        $this->productos = calculos_producto(productos::where('categorias_id', $categoriaId)->get());
     }
     public function marcaSeleccionada($marcaId)
     {
         $this->marcaId = $marcaId;
-        $this->productos = productos::where('marcas_id', $marcaId)->get();
+        $this->productos = calculos_producto(productos::where('marcas_id', $marcaId)->get());
     }
 
     public function agregarAlCarrito($productoId, $cantidad = 1)
@@ -43,6 +46,19 @@ class ProductosList extends Component
     {
         $this->mensajeError = $msj;
     }
+
+    public function actualizarPorcentaje($index)
+    {
+        $this->validate();
+        $productoId = $this->productos[$index]['id'];
+        $producto = productos::find($productoId);
+        $producto->porcentaje_ganacia_tienda = $this->productos[$index]['porcentaje_ganacia_tienda'];
+        $producto->save();
+        $this->productos = calculos_producto(productos::all());
+        //session()->flash('success', 'Porcentaje de ganancia actualizado exitosamente.');
+        $this->emit('mostrarok', "Porcentaje de ganancia actualizado exitosamente.");
+    }
+
     public function render()
     {
         return view('livewire.productosventa.productos-list');

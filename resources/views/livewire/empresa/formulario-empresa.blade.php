@@ -62,6 +62,8 @@
                         <button type="submit"
                             class="btn btn-primary">{{ $empresaId ? 'Actualizar Perfil' : 'Registrar Perfil' }}</button>
                     @endif
+                    <button type="submit"
+                        class="btn btn-primary">{{ $empresaId ? 'Actualizar Perfil' : 'Registrar Perfil' }}</button>
 
                 </form>
             </div>
