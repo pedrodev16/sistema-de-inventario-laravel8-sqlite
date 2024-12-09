@@ -1,7 +1,4 @@
 <!doctype html>
-<html lang="en">
-
-<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
@@ -25,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/default-css.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+
+
+
     <!-- modernizr css -->
     <script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
@@ -36,6 +36,8 @@
 
 
 <body>
+
+
     <!-- preloader area start -->
     <div id="preloader">
         <div class="loader"></div>
@@ -60,10 +62,7 @@
                             <span></span>
                         </div>
                         <div class="search-box pull-left">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
-                                <i class="ti-search"></i>
-                            </form>
+
                         </div>
                     </div>
                     <!-- profile info & task notification -->
@@ -470,6 +469,9 @@
             </div>
         </div>
     </div>
+
+    @livewireScripts
+    @yield('scripts')
     <!-- offset area end -->
     <!-- jquery latest version -->
     <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
@@ -504,7 +506,7 @@
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <!-- all line chart activation -->
-    @livewireScripts
+
     <!-- Start datatable js -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>

@@ -18,8 +18,12 @@
                         </div>
                         <div class="notify-text">
                             <p>{{ $item['nombre'] }}</p>
-                            <span class="msg">Hey I am waiting for you...</span>
-                            <span>3:15 PM</span>
+                            <span class="msg">{{ $item['precio'] }}$ x {{ $item['cantidad'] }} =
+                                {{ $item['subtotal'] }}
+                                <button style="padding: 3px" class="btn btn-danger btn-sm"
+                                    wire:click="eliminarProductoDelCarrito({{ $index }})"><i
+                                        class="ti-close"></i></button></span>
+                            {{-- <span>3:15 PM</span> --}}
                         </div>
                     </a>
                 @endforeach

@@ -66,6 +66,11 @@ Route::middleware(['auth'])->group(function () {
         return view('carrito.index');
     })->name('carrito.index');;
 
+    Route::get('/perfilempresa', function () {
+        return view('empresa.index');
+    })->name('empresa.index');;
+
+
     Route::resource('categorias', categoriasController::class);
     Route::resource('marcas', marcasController::class);
     Route::resource('proveedor', proveedorController::class);

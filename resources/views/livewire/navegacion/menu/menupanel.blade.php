@@ -38,6 +38,15 @@
                              </li>
                          </ul>
                      </li>
+                     <li>
+                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-settings"></i>
+                             <span>Configuración</span></a>
+                         <ul class="collapse">
+                             <li><a href="{{ route('empresa.index') }}">Configuración de Empresa</a></li>
+
+
+                         </ul>
+                     </li>
 
              </nav>
          </div>

@@ -8,6 +8,7 @@ use Livewire\Component;
 class Carrito extends Component
 {
     public $carrito = [];
+    public $mensajeError;
 
     // protected $listeners = ['agregarProductoAlCarrito'];
 
@@ -42,10 +43,21 @@ class Carrito extends Component
 
     public function actualizarCantidad($index, $cantidad)
     {
-        $this->carrito[$index]['cantidad'] = $cantidad;
-        $this->carrito[$index]['subtotal'] = $this->carrito[$index]['precio'] * $cantidad;
+        $producto = productos::findOrFail($this->carrito[$index]['producto_id']);
 
-        session()->put('carrito', $this->carrito);
+        // Verificar si la cantidad no excede el stock disponible 
+        if ($cantidad > $producto->stock->cantidad) {
+            $this->emit('mostrarError', "No se puede añadir más de la cantidad disponible en stock.");
+
+            //$this->mensajeError = "No se puede añadir más de la cantidad disponible en stock.";
+        } else {
+            $this->mensajeError = null;
+            $this->carrito[$index]['cantidad'] = $cantidad;
+            $this->carrito[$index]['subtotal'] = $this->carrito[$index]['precio'] * $cantidad;
+
+            session()->put('carrito', $this->carrito);
+            $this->emit('mostrarok', "Se actualizó el carrito.");
+        }
     }
 
     public function eliminarProductoDelCarrito($index)
@@ -54,7 +66,8 @@ class Carrito extends Component
         $this->carrito = array_values($this->carrito);
 
         session()->put('carrito', $this->carrito);
-        $this->emit('re'); // Emite el evento
+        // $this->emit('re'); // Emite el evento
+        $this->emit('mostrarok', "Se quito producto de  carrito.");
     }
 
     public function realizarVenta()
