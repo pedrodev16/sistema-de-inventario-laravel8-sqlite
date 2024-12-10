@@ -21,7 +21,7 @@ class CarritoNotifi extends Component
 
     public function agregarProductoAlCarrito($productoId, $cantidad)
     {
-        $producto = productos::findOrFail($productoId);
+        $producto = calculo_producto(productos::findOrFail($productoId));
 
         $index = collect($this->carrito)->search(function ($item) use ($productoId) {
             return $item['producto_id'] === $productoId;
@@ -46,9 +46,9 @@ class CarritoNotifi extends Component
                     'img' => $producto->imagen,
                     'producto_id' => $producto->id,
                     'nombre' => $producto->nombre,
-                    'precio' => $producto->costo,
+                    'precio' => $producto->costo_venta_usd,
                     'cantidad' => $cantidad,
-                    'subtotal' => $producto->costo * $cantidad,
+                    'subtotal' => $producto->costo_venta_usd * $cantidad,
                 ];
             }
 
