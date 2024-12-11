@@ -12,6 +12,7 @@ class Carrito extends Component
 {
     public $carrito = [];
     public $mensajeError;
+    public $totalCarrito_proveedor = 0;
     public $totalCarrito = 0;
     public $metodoPago; // Nuevo campo para el método de pago
     // protected $listeners = ['agregarProductoAlCarrito'];
@@ -20,6 +21,7 @@ class Carrito extends Component
     {
         $this->carrito = session()->get('carrito', []);
         $this->calcularTotalCarrito();
+        $this->calcularTotalCarrito_prov();
     }
 
     // public function agregarProductoAlCarrito($productoId, $cantidad)
@@ -59,6 +61,7 @@ class Carrito extends Component
             $this->mensajeError = null;
             $this->carrito[$index]['cantidad'] = $cantidad;
             $this->carrito[$index]['subtotal'] = $this->carrito[$index]['precio'] * $cantidad;
+            $this->carrito[$index]['subtotal_proveedor'] = $this->carrito[$index]['precio_proveedor'] * $cantidad;
             $this->calcularTotalCarrito();
             session()->put('carrito', $this->carrito);
             $this->emit('re'); // Emite el evento
@@ -71,6 +74,7 @@ class Carrito extends Component
         unset($this->carrito[$index]);
         $this->carrito = array_values($this->carrito);
         $this->calcularTotalCarrito();
+        $this->calcularTotalCarrito_prov();
         session()->put('carrito', $this->carrito);
         $this->emit('re'); // Emite el evento
         $this->emit('mostrarok', "Se quito producto de  carrito.");
@@ -81,7 +85,7 @@ class Carrito extends Component
     {
 
         $this->calcularTotalCarrito();
-
+        $this->calcularTotalCarrito_prov();
 
         if (count($this->carrito) === 0) {
             session()->flash('error', 'El carrito está vacío. No se puede realizar la venta.');
@@ -94,7 +98,9 @@ class Carrito extends Component
             $venta = \App\Models\Venta::create([
                 'user_id' => auth()->id(),
                 'total' => $this->totalCarrito,
+                'total_proveedor' => $this->totalCarrito_proveedor,
                 'metodo_pago' => $this->metodoPago, // Captura del método de pago
+                'ganancia' => $this->totalCarrito - $this->totalCarrito_proveedor,
             ]);
 
             foreach ($this->carrito as $item) {
@@ -106,6 +112,8 @@ class Carrito extends Component
                     'cantidad' => $item['cantidad'],
                     'precio' => $item['precio'],
                     'subtotal' => $item['subtotal'],
+                    'precio_proveedor' => $item['precio_proveedor'],
+                    'subtotal_proveedor' => $item['subtotal_proveedor'],
                 ]);
 
                 $producto->stock->cantidad -= $item['cantidad'];
@@ -118,6 +126,7 @@ class Carrito extends Component
             session()->forget('carrito');
             session()->flash('success', 'Venta realizada exitosamente.');
             $this->emit('ventaRealizada');
+            $this->emit('re'); // Emite el evento
         } catch (\Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Hubo un problema al realizar la venta: ' . $e->getMessage());
@@ -138,6 +147,12 @@ class Carrito extends Component
     {
         $this->totalCarrito = array_reduce($this->carrito, function ($carry, $item) {
             return $carry + $item['subtotal'];
+        }, 0);
+    }
+    public function calcularTotalCarrito_prov()
+    {
+        $this->totalCarrito_proveedor = array_reduce($this->carrito, function ($carry, $item) {
+            return $carry + $item['subtotal_proveedor'];
         }, 0);
     }
     public function render()

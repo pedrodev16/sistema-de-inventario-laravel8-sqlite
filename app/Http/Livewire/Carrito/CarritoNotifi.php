@@ -41,11 +41,14 @@ class CarritoNotifi extends Component
             if ($index !== false) {
                 $this->carrito[$index]['cantidad'] += $cantidad;
                 $this->carrito[$index]['subtotal'] = $this->carrito[$index]['precio'] * $this->carrito[$index]['cantidad'];
+                $this->carrito[$index]['subtotal_proveedor'] = $this->carrito[$index]['precio_proveedor'] * $this->carrito[$index]['cantidad'];
             } else {
                 $this->carrito[] = [
                     'img' => $producto->imagen,
                     'producto_id' => $producto->id,
                     'nombre' => $producto->nombre,
+                    'precio_proveedor' => $producto->costo,
+                    'subtotal_proveedor' => $producto->costo * $cantidad,
                     'precio' => $producto->costo_venta_usd,
                     'cantidad' => $cantidad,
                     'subtotal' => $producto->costo_venta_usd * $cantidad,
@@ -70,7 +73,7 @@ class CarritoNotifi extends Component
             $this->mensajeError = null;
             $this->carrito[$index]['cantidad'] = $cantidad;
             $this->carrito[$index]['subtotal'] = $this->carrito[$index]['precio'] * $cantidad;
-
+            $this->carrito[$index]['subtotal_proveedor'] = $this->carrito[$index]['precio_proveedor'] * $cantidad;
             session()->put('carrito', $this->carrito);
             $this->emit('mostrarok', "Se actualizó el carrito.");
         }
@@ -84,14 +87,8 @@ class CarritoNotifi extends Component
         $this->emit('mostrarok', "Se quito producto de  carrito.");
     }
 
-    public function realizarVenta()
-    {
-        // Lógica para realizar la venta (guardar en la base de datos, manejar el inventario, etc.)
 
-        $this->carrito = [];
-        session()->forget('carrito');
-        session()->flash('success', 'Venta realizada exitosamente.');
-    }
+
     public function render()
     {
 

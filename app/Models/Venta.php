@@ -9,7 +9,7 @@ class Venta extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'total', 'metodo_pago',];
+    protected $fillable = ['user_id', 'total', 'metodo_pago', 'total_proveedor', 'ganancia'];
     public function detalles()
     {
         return $this->hasMany(VentaDetalle::class);

@@ -31,8 +31,8 @@
                                             wire:model.lazy="carrito.{{ $index }}.cantidad"
                                             wire:change="actualizarCantidad({{ $index }}, $event.target.value)">
                                     </td>
-                                    <td>{{ $item['precio'] }}$</td>
-                                    <td>{{ $item['subtotal'] }}$</td>
+                                    <td>{{ $item['precio'] }}$ {{ $item['precio_proveedor'] }}</td>
+                                    <td>{{ $item['subtotal'] }}$ {{ $item['subtotal_proveedor'] }}</td>
                                     <td>
                                         <button class="btn btn-danger btn-sm"
                                             wire:click="eliminarProductoDelCarrito({{ $index }})">Eliminar</button>

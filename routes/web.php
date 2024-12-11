@@ -70,6 +70,13 @@ Route::middleware(['auth'])->group(function () {
         return view('empresa.index');
     })->name('empresa.index');;
 
+    Route::get('/ventas', function () {
+        return view('ventas.index');
+    })->name('ventas.index');
+
+    Route::get('/cuadre', function () {
+        return view('cuadre.index');
+    })->name('cuadre.index');
 
     Route::resource('categorias', categoriasController::class);
     Route::resource('marcas', marcasController::class);

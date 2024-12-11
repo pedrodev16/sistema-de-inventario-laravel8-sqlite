@@ -20,6 +20,8 @@ class CreateVentasTable extends Migration
             // Relación con la tabla de usuarios 
             $table->string('metodo_pago');
             $table->decimal('total', 10, 2);
+            $table->decimal('total_proveedor', 10, 2);
+            $table->decimal('ganancia', 10, 2);
             $table->timestamps();
         });
     }

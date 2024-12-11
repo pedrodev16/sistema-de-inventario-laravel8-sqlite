@@ -25,6 +25,10 @@ class CreateVentaDetallesTable extends Migration
             $table->integer('cantidad');
             $table->decimal('precio', 10, 2);
             $table->decimal('subtotal', 10, 2);
+
+            $table->decimal('precio_proveedor', 10, 2);
+            $table->decimal('subtotal_proveedor', 10, 2);
+
             $table->timestamps();
         });
     }

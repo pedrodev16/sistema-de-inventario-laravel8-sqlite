@@ -21,9 +21,10 @@
                          <a href="{{ route('carrito.index') }}"><i class="ti-shopping-cart"></i><span>Carrito</span></a>
                      </li>
                      <li class="active">
-                         <a href="{{ route('stock.index') }}"><i class="ti-agenda"></i><span>Ventas</span></a>
+                         <a href="{{ route('ventas.index') }}"><i class="ti-agenda"></i><span>Ventas</span></a>
                      </li>
                      <li>
+
                          <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i>
                              <span>Administración</span></a>
                          <ul class="collapse">
@@ -34,6 +35,10 @@
                              <li><a href="{{ route('producto.index') }}">Productos</a></li>
                              <li>
                                  <a href="{{ route('stock.index') }}">Stock</a>
+
+                             </li>
+                             <li>
+                                 <a href="{{ route('cuadre.index') }}">Cuadre</a>
 
                              </li>
                          </ul>
