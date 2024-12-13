@@ -19,7 +19,8 @@
                 </div>
             @endif
             @foreach ($productos as $index => $producto)
-                <div class="media mb-4 p-3 border rounded" style="    background: #f6fbf7;">
+                <div class="media mb-4 p-3 border rounded"
+                    style="background:{{ $producto->stock->cantidad > 0 ? '#f6fbf' : '#d3dfe1' }} ;">
                     <img style="width: 20%;" class="img-fluid mr-4 rounded"
                         src="{{ asset(str_replace('public', 'storage', $producto->imagen)) }}"
                         alt="Imagen de {{ $producto->nombre }}">
@@ -32,7 +33,8 @@
                                     <strong>Precio:</strong> {{ $producto->costo }}$<br>
                                     <strong>Ganancia Tienda:</strong> {{ $producto->porcentaje_ganacia_tienda }}%<br>
                                     <strong>Mercado Libre:</strong> {{ $producto->mercad_l }}$<br>
-                                    <strong>IVA:</strong> {{ $producto->iva }}$
+                                    <strong>IVA:</strong> {{ $producto->iva }}$<br>
+                                    <strong>Stock:</strong> {{ $producto->stock->cantidad }}
                                 </p>
                                 <hr>
                                 <p>{{ $producto->descripcion }}</p>
@@ -59,8 +61,12 @@
                                     <span class="text-primary">{{ $producto->costo_venta_usd }}$</span><br>
                                     <small class="text-muted">{{ $producto->costo_venta_bs }}Bs</small>
                                 </h3>
-                                <button class="btn btn-primary btn-sm mt-2"
-                                    wire:click="agregarAlCarrito({{ $producto->id }})">Añadir al Carrito</button>
+
+                                @if ($producto->stock->cantidad > 0)
+                                    <button class="btn btn-primary btn-sm mt-2"
+                                        wire:click="agregarAlCarrito({{ $producto->id }})">Añadir al Carrito</button>
+                                @endif
+
                             </div>
                         </div>
                     </div>

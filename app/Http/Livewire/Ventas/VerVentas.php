@@ -40,9 +40,10 @@ class VerVentas extends Component
         }
 
         if ($this->filtroMetodoPago) {
-            $query->where('metodo_pago', $this->filtroMetodoPago);
+            $query->where(function ($q) {
+                $q->where($this->filtroMetodoPago, '>', 0);
+            });
         }
-
         $this->ventas = $query->get();
     }
     public function render()

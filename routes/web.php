@@ -78,6 +78,11 @@ Route::middleware(['auth'])->group(function () {
         return view('cuadre.index');
     })->name('cuadre.index');
 
+    Route::get('/historiacuadre', function () {
+        return view('cuadre.HistoriaCuadre');
+    })->name('cuadre.hostoria');
+
+
     Route::resource('categorias', categoriasController::class);
     Route::resource('marcas', marcasController::class);
     Route::resource('proveedor', proveedorController::class);

@@ -24,6 +24,7 @@
                                        wire:click="eliminarProductoDelCarrito({{ $index }})"><i
                                            class="ti-close"></i></button></span>
                                {{-- <span>3:15 PM</span> --}}
+
                            </div>
                        </a>
                    @endforeach

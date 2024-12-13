@@ -17,6 +17,11 @@ class Carrito extends Component
     public $metodoPago; // Nuevo campo para el método de pago
     // protected $listeners = ['agregarProductoAlCarrito'];
 
+    public $metodosPago = []; // Array para almacenar los métodos de pago y sus montos
+
+    public $montoPago; // Monto pagado por el cliente con el método seleccionado
+
+
     public function mount()
     {
         $this->carrito = session()->get('carrito', []);
@@ -47,6 +52,23 @@ class Carrito extends Component
 
     //     session()->put('carrito', $this->carrito);
     // }
+
+    public function agregarMetodoPago()
+    {
+        $this->metodosPago[] = [
+            'metodo' => $this->metodoPago,
+            'monto' => $this->montoPago
+        ];
+
+        $this->metodoPago = null;
+        $this->montoPago = null;
+    }
+    public function calcularTotalPagado()
+    {
+        return array_reduce($this->metodosPago, function ($carry, $item) {
+            return $carry + $item['monto'];
+        }, 0);
+    }
 
     public function actualizarCantidad($index, $cantidad)
     {
@@ -99,10 +121,20 @@ class Carrito extends Component
                 'user_id' => auth()->id(),
                 'total' => $this->totalCarrito,
                 'total_proveedor' => $this->totalCarrito_proveedor,
-                'metodo_pago' => $this->metodoPago, // Captura del método de pago
+                'metodo_pago' => '0', // Captura del método de pago
                 'ganancia' => $this->totalCarrito - $this->totalCarrito_proveedor,
+                'pagomovil' => 0,
+                'punto_de_venta' => 0,
+                'transferencias' => 0,
+                'efectivousd' => 0,
+                'efectivobs' => 0,
+                'paypal' => 0,
+                'zelle' => 0,
             ]);
-
+            foreach ($this->metodosPago as $metodo) {
+                $venta->{$metodo['metodo']} = $metodo['monto'];
+            }
+            $venta->save();
             foreach ($this->carrito as $item) {
                 $producto = \App\Models\productos::findOrFail($item['producto_id']);
 
@@ -132,16 +164,6 @@ class Carrito extends Component
             session()->flash('error', 'Hubo un problema al realizar la venta: ' . $e->getMessage());
         }
     }
-
-    // public function realizarVenta()
-    // {
-    //     // Lógica para realizar la venta (guardar en la base de datos, manejar el inventario, etc.)
-    //     $this->calcularTotalCarrito();
-    //     $this->carrito = [];
-    //     session()->forget('carrito');
-    //     session()->flash('success', 'Venta realizada exitosamente.');
-    // }
-
 
     public function calcularTotalCarrito()
     {

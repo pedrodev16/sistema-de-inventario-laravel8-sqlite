@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Cuadre;
 
+use App\Helpers\HelpersInventario;
 use App\Models\Cuadre as ModelsCuadre;
 use App\Models\Venta;
 use Carbon\Carbon;
@@ -17,7 +18,10 @@ class Cuadre extends Component
     public $registrar_egreso = false;
     public $concepto_egreso = '';
     public $total_egreso = 0;
-    public $x;
+    public $totalGananciapordia;
+    public $totalesPorMetodo = [];
+    public $ventasPorUsuario = [];
+    public $totalesMetodosPago = [];
     public function mount()
     {
         $this->crearInicioCuadre();
@@ -35,19 +39,26 @@ class Cuadre extends Component
             ]);
         }
     }
+
+
+
     public function ver_cuadre($id)
     {
         $this->idCuadre = $id;
         $cuadre = ModelsCuadre::find($id);
         $fecha = Carbon::parse($cuadre->fecha);
+        // Calcular totales por método de pago 
 
+        $this->ventasPorUsuario = HelpersInventario::sumarVentasPorUsuario('day', $fecha);
         if (!$cuadre) {
             return;
         }
+
         $this->ventasDelDia = Venta::whereDay('created_at', $fecha)->get()->toArray();
         $totalIngreso = array_sum(array_column($this->ventasDelDia, 'total'));
         $this->ventasDelDia = Venta::whereDay('created_at', $fecha)->get();
-        $this->x = $totalIngreso;
+        $this->totalesMetodosPago = HelpersInventario::calcularTotalesMetodosPago($this->ventasDelDia);
+        $this->totalGananciapordia = $totalIngreso;
     }
     public function realizarCuadre($id)
     {
@@ -76,17 +87,22 @@ class Cuadre extends Component
         $this->registrar_egreso = false;
         $this->concepto_egreso = '';
         $this->total_egreso = 0;
-
+        $this->ventasDelDia = [];
         // Actualizar la lista de cuadre
         $this->cuadres = ModelsCuadre::all()->toArray();
     }
+
+
 
 
     public function render()
     {
         return view('livewire.cuadre.cuadre', [
             'cuadres' => $this->cuadres,
-            'ventasDelDia' => $this->ventasDelDia
+            'ventasDelDia' => $this->ventasDelDia,
+            'totalesPorMetodo' => $this->totalesPorMetodo,
+            'ventasPorUsuario' => $this->ventasPorUsuario,
+            'totalesMetodosPago' => $this->totalesMetodosPago
         ]);
     }
 }

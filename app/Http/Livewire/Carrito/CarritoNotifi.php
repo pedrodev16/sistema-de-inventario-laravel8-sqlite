@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Carrito;
 
+use App\Helpers\HelpersInventario;
 use App\Http\Controllers\producto;
 use App\Models\productos;
 use Livewire\Component;
@@ -21,7 +22,7 @@ class CarritoNotifi extends Component
 
     public function agregarProductoAlCarrito($productoId, $cantidad)
     {
-        $producto = calculo_producto(productos::findOrFail($productoId));
+        $producto = HelpersInventario::calculo_producto(productos::findOrFail($productoId));
 
         $index = collect($this->carrito)->search(function ($item) use ($productoId) {
             return $item['producto_id'] === $productoId;

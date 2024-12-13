@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Productosventa;
 
+use App\Helpers\HelpersInventario;
 use App\Models\Empresa;
 use App\Models\productos;
 use Livewire\Component;
@@ -21,25 +22,25 @@ class ProductosList extends Component
     public function mount()
     {
         $this->empresa = Empresa::where('id', 1)->get();
-        $this->productos = calculo_productos(productos::all());
+        $this->productos = HelpersInventario::calculo_productos(productos::all());
     }
     protected $listeners = ['categoriaSeleccionada', 'marcaSeleccionada', 'mensajeerrorcarrito'];
 
     public function categoriaSeleccionada($categoriaId)
     {
         $this->categoriaId = $categoriaId;
-        $this->productos = calculo_productos(productos::where('categorias_id', $categoriaId)->get());
+        $this->productos = HelpersInventario::calculo_productos(productos::where('categorias_id', $categoriaId)->get());
     }
     public function marcaSeleccionada($marcaId)
     {
         $this->marcaId = $marcaId;
-        $this->productos = calculo_productos(productos::where('marcas_id', $marcaId)->get());
+        $this->productos = HelpersInventario::calculo_productos(productos::where('marcas_id', $marcaId)->get());
     }
 
     public function agregarAlCarrito($productoId, $cantidad = 1)
     {
         $this->emit('agregarProductoAlCarrito', $productoId, $cantidad);
-        $this->productos = calculo_productos(productos::all());
+        $this->productos = HelpersInventario::calculo_productos(productos::all());
     }
 
     public function mensajeerrorcarrito($msj)
@@ -54,7 +55,7 @@ class ProductosList extends Component
         $producto = productos::find($productoId);
         $producto->porcentaje_ganacia_tienda = $this->productos[$index]['porcentaje_ganacia_tienda'];
         $producto->save();
-        $this->productos = calculo_productos(productos::all());
+        $this->productos = HelpersInventario::calculo_productos(productos::all());
         //session()->flash('success', 'Porcentaje de ganancia actualizado exitosamente.');
         $this->emit('mostrarok', "Porcentaje de ganancia actualizado exitosamente.");
     }

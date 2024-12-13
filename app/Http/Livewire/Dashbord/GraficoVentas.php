@@ -11,7 +11,7 @@ class GraficoVentas extends Component
 
     public $ventasPorMes = [];
     public $ventasPorAno = [];
-    public $ventasPorMetodo = [];
+
 
     public function mount()
     {
@@ -45,11 +45,7 @@ class GraficoVentas extends Component
         })->values()->toArray();
 
         // Obtener ventas por método de pago
-        $this->ventasPorMetodo = Venta::selectRaw('metodo_pago, COUNT(*) as total')
-            ->groupBy('metodo_pago')
-            ->get()
-            ->keyBy('metodo_pago')
-            ->toArray();
+
     }
 
     public function render()
@@ -57,7 +53,7 @@ class GraficoVentas extends Component
         return view('livewire.dashbord.grafico-ventas', [
             'ventasPorMes' => $this->ventasPorMes,
             'ventasPorAno' => $this->ventasPorAno,
-            'ventasPorMetodo' => $this->ventasPorMetodo,
+
         ]);
     }
 }

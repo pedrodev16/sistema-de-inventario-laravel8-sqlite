@@ -9,22 +9,27 @@ use Livewire\Component;
 class MetodopagoGrafico extends Component
 {
 
-    public $ventasPorDiaMetodo = [];
+    public $montosPorMetodo = [];
 
     public function mount()
     {
-        $this->obtenerDatosVentas();
+        $this->obtenerDatos();
     }
 
-    public function obtenerDatosVentas()
+    public function obtenerDatos()
     {
-        $ventas = Venta::all()->groupBy(function ($date) {
-            return Carbon::parse($date->created_at)->format('Y-m-d');
-        });
+        $fecha = Carbon::today();
+        $ventas = Venta::whereDay('created_at', $fecha)->get();
 
-        $this->ventasPorDiaMetodo = $ventas->map(function ($ventasDia, $dia) {
-            return $ventasDia->groupBy('metodo_pago')->map->count();
-        });
+        $this->montosPorMetodo = [
+            'pagomovil' => $ventas->sum('pagomovil'),
+            'punto_de_venta' => $ventas->sum('punto_de_venta'),
+            'transferencias' => $ventas->sum('transferencias'),
+            'efectivousd' => $ventas->sum('efectivousd'),
+            'efectivobs' => $ventas->sum('efectivobs'),
+            'paypal' => $ventas->sum('paypal'),
+            'zelle' => $ventas->sum('zelle')
+        ];
     }
     public function render()
     {

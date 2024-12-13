@@ -23,6 +23,15 @@ class CreateVentasTable extends Migration
             $table->decimal('total_proveedor', 10, 2);
             $table->decimal('ganancia', 10, 2);
             $table->timestamps();
+
+            // Nuevos campos para diferentes métodos de pago
+            $table->decimal('pagomovil', 10, 2)->nullable();
+            $table->decimal('punto_de_venta', 10, 2)->nullable();
+            $table->decimal('transferencias', 10, 2)->nullable();
+            $table->decimal('efectivousd', 10, 2)->nullable();
+            $table->decimal('efectivobs', 10, 2)->nullable();
+            $table->decimal('paypal', 10, 2)->nullable();
+            $table->decimal('zelle', 10, 2)->nullable();
         });
     }
 
