@@ -36,13 +36,7 @@
                                                     <div class="row">
                                                         <button class="btn btn-warning btn-sm"
                                                             wire:click="editarCategoria({{ $lista->id }})">Editar
-                                                            <form method="post"
-                                                                action="{{ route('categorias.destroy', $lista->id) }}">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger">DEL</button>
-                                                            </form>
+
                                                     </div>
                                                 </td>
                                             </tr>

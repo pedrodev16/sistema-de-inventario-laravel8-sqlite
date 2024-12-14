@@ -19,6 +19,11 @@ class User extends Authenticatable
         // return $this->belongsToMany(tipo_admin::class);
         //return $this->hasOne(tipo_admin::class);
     }
+
+    public function hasRole($role)
+    {
+        return $this->tipoAdmin && $this->tipoAdmin->tipo === $role;
+    }
     /**
      * The attributes that are mass assignable.
      *

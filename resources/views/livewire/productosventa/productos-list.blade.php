@@ -1,7 +1,40 @@
 <div>
 
 
+    <!-- Filtros -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body bg-light">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label for="codigo" class="form-label">Código:</label>
+                    <input type="text" id="codigo" wire:model="codigo" class="form-control" placeholder="Código">
+                </div>
+                <div class="col-md-3">
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input type="text" id="nombre" wire:model="nombre" class="form-control" placeholder="Nombre">
+                </div>
 
+                <div class="col-md-3">
+                    <label for="categoria" class="form-label">Categoría:</label>
+                    <select id="categoria" wire:model="categoria" class="form-select">
+                        <option value="">Seleccione Categoría</option>
+                        @foreach ($categorias as $categoria)
+                            <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="marca" class="form-label">Marca:</label>
+                    <select id="marca" wire:model="marca" class="form-select">
+                        <option value="">Seleccione Marca</option>
+                        @foreach ($marcas as $marca)
+                            <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="card">
@@ -13,7 +46,8 @@
             @if (count($productos) < 1)
                 <div class="alert alert-primary" role="alert">
                     <h4 class="alert-heading">No tiene productos registrados</h4>
-                    <p>Para registrar productos <a class="btn btn-info" href="{{ route('producto.index') }}">Aqui</a> </p>
+                    <p>Para registrar productos <a class="btn btn-info" href="{{ route('producto.index') }}">Aqui</a>
+                    </p>
                     <hr />
                     <p class="mb-0">...</p>
                 </div>

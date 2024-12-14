@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Productosventa;
 
 use App\Helpers\HelpersInventario;
+use App\Http\Controllers\producto;
+use App\Models\Categorias;
 use App\Models\Empresa;
+use App\Models\marcas;
 use App\Models\productos;
 use Livewire\Component;
 
@@ -17,14 +20,45 @@ class ProductosList extends Component
     public $empresa;
 
 
+    public $codigo;
+    public $nombre;
+    public $categoria;
+    public $marca;
     protected $rules = ['productos.*.porcentaje_ganacia_tienda' => 'required|numeric|min:0|max:100',];
 
     public function mount()
     {
+        $this->obtenerProductos();
         $this->empresa = Empresa::where('id', 1)->get();
         $this->productos = HelpersInventario::calculo_productos(productos::all());
     }
     protected $listeners = ['categoriaSeleccionada', 'marcaSeleccionada', 'mensajeerrorcarrito'];
+
+
+    // nueva funcionalidad de filtrado
+    public function updated($propertyName)
+    {
+        $this->obtenerProductos();
+    }
+    public function obtenerProductos()
+    {
+        $query = productos::query();
+        if ($this->codigo) {
+            $query->where('codigo', 'like', '%' . $this->codigo . '%');
+        }
+        if ($this->nombre) {
+            $query->where('nombre', 'like', '%' . $this->nombre . '%');
+        }
+        if ($this->categoria) {
+            $query->where('categorias_id', $this->categoria);
+        }
+        if ($this->marca) {
+            $query->where('marcas_id', $this->marca);
+        }
+        $this->productos = HelpersInventario::calculo_productos($query->get());
+    }
+
+    //_-------------------------------------
 
     public function categoriaSeleccionada($categoriaId)
     {
@@ -62,6 +96,12 @@ class ProductosList extends Component
 
     public function render()
     {
-        return view('livewire.productosventa.productos-list');
+        return view(
+            'livewire.productosventa.productos-list',
+            [
+                'categorias' => Categorias::all(),
+                'marcas' => marcas::all(),
+            ]
+        );
     }
 }

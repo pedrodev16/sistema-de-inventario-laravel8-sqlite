@@ -35,12 +35,7 @@
                                                     <div class="row">
                                                         <button class="btn btn-warning btn-sm"
                                                             wire:click="editarProveedor({{ $lista->id }})">Editar</button>
-                                                        <form method="post"
-                                                            action="{{ route('proveedor.destroy', $lista->id) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">DEL</button>
-                                                        </form>
+
                                                     </div>
                                                 </td>
                                             </tr>

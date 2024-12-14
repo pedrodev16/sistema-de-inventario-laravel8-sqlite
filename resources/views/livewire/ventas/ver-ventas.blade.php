@@ -5,7 +5,7 @@
 
 
         <div class="card shadow-sm">
-            <div class="card-body">
+            <div class="card-body" style="background: #e5e5d5">
                 <h4 class="mb-4">Filtros de Ventas</h4>
                 <div class="row g-3 mb-4">
                     <div class="col-md-3">
@@ -37,7 +37,20 @@
                         </select>
                     </div>
                 </div>
+                <form action="{{ route('reporte.ventafiltro') }}" method="post">
+
+                    @csrf
+                    <input hidden type="text" name="dia" value="{{ $filtroDia }}">
+                    <input hidden type="text" name="mes" value="{{ $filtroMes }}">
+                    <input hidden type="text" name="ano" value="{{ $filtroAno }}">
+                    <input hidden type="text" name="metod" value="{{ $filtroMetodoPago }}">
+                    <button type="submit" class="btn btn-primary">
+                        Descargar informe
+                    </button>
+
+                </form>
             </div>
+
         </div>
     </div>
 
@@ -46,7 +59,10 @@
         <div class="card mb-4 shadow-sm">
             <div class="card-header bg-primary text-white">
                 <h5 class="card-title mb-0">Venta ID: {{ $venta->id }}</h5>
+
+
                 <p class="mb-0">Usuario: {{ $venta->user->name }}</p>
+
             </div>
             <div class="card-body">
                 <p><strong>Total:</strong> {{ number_format($venta->total, 2, ',', '.') }}$</p>
@@ -79,6 +95,7 @@
                 <table class="table table-bordered">
                     <thead class="table-light">
                         <tr>
+                            <th>Cod</th>
                             <th>Producto</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
@@ -88,6 +105,7 @@
                     <tbody>
                         @foreach ($venta->detalles as $detalle)
                             <tr>
+                                <td>{{ $detalle->producto->codigo }}</td>
                                 <td>{{ $detalle->producto->nombre }}</td>
                                 <td>{{ $detalle->cantidad }}</td>
                                 <td>{{ number_format($detalle->precio, 2, ',', '.') }}$</td>
@@ -96,7 +114,13 @@
                         @endforeach
                     </tbody>
                 </table>
+                <a class="btn btn-info" href="{{ route('reporte.venta', $venta->id) }}">Descargar informe de la
+                    venta</a>
+
+
+
             </div>
+
         </div>
     @endforeach
 </div>

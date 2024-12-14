@@ -6,13 +6,13 @@
 
     <div class="row">
 
-        <div class="col-md-12" style="display: contents">
+        {{-- <div class="col-md-12" style="display: contents">
             @livewire('productosventa.b-producto')
             @livewire('navegacion.menu.categorias')
             @livewire('navegacion.menu.marcas')
 
 
-        </div>
+        </div> --}}
         <div class="col-md-12">
 
 

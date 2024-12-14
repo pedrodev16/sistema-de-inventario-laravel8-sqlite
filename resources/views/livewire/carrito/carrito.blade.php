@@ -3,7 +3,7 @@
         <div class="card-body">
             @if (session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
+                    {!! session('success') !!}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
@@ -16,7 +16,7 @@
             <h2 class="mb-4">Carrito de Compras</h2>
 
             @if (count($carrito) > 0)
-                <table class="table table-bordered table-hover">
+                <table id="dataTable" class="table table-bordered table-hover">
                     <thead class="table-dark">
                         <tr>
                             <th>Producto</th>
@@ -49,6 +49,8 @@
                 <div class="row justify-content-center align-items-center g-4 mt-4">
                     <div class="col-md-4">
                         <h4 class="mb-3">Total del Carrito: {{ number_format($totalCarrito, 2, ',', '.') }}$</h4>
+                        <h4 class="mb-3"> {{ number_format($totalbs, 2, ',', '.') }} Bs</h4>
+
                     </div>
                     <div class="col-md-4">
                         <h3 class="mb-3">Métodos de Pago</h3>

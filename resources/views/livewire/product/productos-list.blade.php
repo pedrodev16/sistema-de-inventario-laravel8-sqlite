@@ -46,16 +46,7 @@
                                             </li>
                                             <li><a href="#" class="text-danger"><i class="ti-trash"></i></a></li>
                                         </ul>
-                                        {{-- <div class="row">
-                                            <a name="" id="" class="btn btn-primary"
-                                                href="{{ url('producto/' . $lista->id . '/edit') }}"
-                                                role="button">Edit</a>
-                                            <form method="post" action="{{ route('producto.destroy', $lista->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">DEL</button>
-                                            </form>
-                                        </div> --}}
+
                                     </td>
                                 </tr>
                             @endif

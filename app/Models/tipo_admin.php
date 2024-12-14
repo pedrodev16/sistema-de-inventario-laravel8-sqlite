@@ -9,6 +9,7 @@ class tipo_admin extends Model
 {
     use HasFactory;
     protected $table = 'tipo_admins';
+    protected $fillable = ['tipo'];
     // public function users()
     // {
     //     return $this->hasMany(User::class, 'tipo_admin_id');

@@ -37,9 +37,7 @@
                                             <div class="row">
                                                 <button class="btn btn-warning btn-sm"
                                                     wire:click="editarUsuario({{ $lista->id }})">Editar</button>
-                                                <a name="" id="" class="btn btn-danger"
-                                                    href="{{ route('Usuario.del', ['id' => $lista->id]) }}"
-                                                    role="button">Del</a>
+
                                             </div>
                                         </td>
                                     </tr>

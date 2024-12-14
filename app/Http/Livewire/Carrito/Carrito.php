@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Carrito;
 
+use App\Helpers\HelpersInventario;
 use App\Models\productos;
 use Illuminate\Support\Facades\DB;
 
 
 use Livewire\Component;
+use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 
 class Carrito extends Component
 {
@@ -15,6 +17,7 @@ class Carrito extends Component
     public $totalCarrito_proveedor = 0;
     public $totalCarrito = 0;
     public $metodoPago; // Nuevo campo para el método de pago
+    public $totalbs;
     // protected $listeners = ['agregarProductoAlCarrito'];
 
     public $metodosPago = []; // Array para almacenar los métodos de pago y sus montos
@@ -156,7 +159,8 @@ class Carrito extends Component
 
             $this->carrito = [];
             session()->forget('carrito');
-            session()->flash('success', 'Venta realizada exitosamente.');
+            session()->flash('success', 'Venta realizada exitosamente. <a href="' . route('reporte.venta', $venta->id) . '">Descargar informe de la venta</a>');
+
             $this->emit('ventaRealizada');
             $this->emit('re'); // Emite el evento
         } catch (\Exception $e) {
@@ -179,6 +183,7 @@ class Carrito extends Component
     }
     public function render()
     {
+        $this->totalbs = HelpersInventario::convertir($this->totalCarrito);
         return view('livewire.carrito.carrito');
     }
 }

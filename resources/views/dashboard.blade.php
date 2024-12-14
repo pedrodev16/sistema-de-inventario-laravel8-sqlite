@@ -4,12 +4,11 @@
 
 @section('content')
 
-    <h1 class="text-center"> Bienvenido {{ $user->name }}</h1>
-    Nivel {{ $user->tipoAdmin->tipo }}
+    {{-- <h1 class="text-center"> Bienvenido {{ $user->name }}</h1>
+    Nivel {{ $user->tipoAdmin->tipo }} --}}
 
 
-
-
+    <a href="{{ route('reporte.pdf') }}">imprimir</a>
     <div class="row">
 
 

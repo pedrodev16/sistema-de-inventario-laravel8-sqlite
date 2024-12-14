@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Ventas;
 use App\Models\Venta;
 use Livewire\Component;
 
+
 class VerVentas extends Component
 {
     public $ventas = [];
@@ -12,6 +13,7 @@ class VerVentas extends Component
     public $filtroMes;
     public $filtroAno;
     public $filtroMetodoPago;
+    public $x;
 
     public function mount()
     {
@@ -46,6 +48,12 @@ class VerVentas extends Component
         }
         $this->ventas = $query->get();
     }
+
+
+
+
+
+
     public function render()
     {
         return view('livewire.ventas.ver-ventas');
