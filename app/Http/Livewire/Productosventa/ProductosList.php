@@ -14,6 +14,8 @@ class ProductosList extends Component
 {
 
     public $productos;
+
+    public $productos2;
     public $categoriaId;
     public $marcaId;
     public $mensajeError;
@@ -24,7 +26,7 @@ class ProductosList extends Component
     public $nombre;
     public $categoria;
     public $marca;
-    protected $rules = ['productos.*.porcentaje_ganacia_tienda' => 'required|numeric|min:0|max:100',];
+    public $x;
 
     public function mount()
     {
@@ -32,7 +34,7 @@ class ProductosList extends Component
         $this->empresa = Empresa::where('id', 1)->get();
         $this->productos = HelpersInventario::calculo_productos(productos::all());
     }
-    protected $listeners = ['categoriaSeleccionada', 'marcaSeleccionada', 'mensajeerrorcarrito'];
+    protected $listeners = ['mensajeerrorcarrito'];
 
 
     // nueva funcionalidad de filtrado
@@ -60,16 +62,16 @@ class ProductosList extends Component
 
     //_-------------------------------------
 
-    public function categoriaSeleccionada($categoriaId)
-    {
-        $this->categoriaId = $categoriaId;
-        $this->productos = HelpersInventario::calculo_productos(productos::where('categorias_id', $categoriaId)->get());
-    }
-    public function marcaSeleccionada($marcaId)
-    {
-        $this->marcaId = $marcaId;
-        $this->productos = HelpersInventario::calculo_productos(productos::where('marcas_id', $marcaId)->get());
-    }
+    // public function categoriaSeleccionada($categoriaId)
+    // {
+    //     $this->categoriaId = $categoriaId;
+    //     $this->productos = HelpersInventario::calculo_productos(productos::where('categorias_id', $categoriaId)->get());
+    // }
+    // public function marcaSeleccionada($marcaId)
+    // {
+    //     $this->marcaId = $marcaId;
+    //     $this->productos = HelpersInventario::calculo_productos(productos::where('marcas_id', $marcaId)->get());
+    // }
 
     public function agregarAlCarrito($productoId, $cantidad = 1)
     {
@@ -84,14 +86,18 @@ class ProductosList extends Component
 
     public function actualizarPorcentaje($index)
     {
-        $this->validate();
+        $this->validate(['productos2.' . $index . '.porcentaje_ganacia_tienda' => 'required|numeric|min:0',]);
         $productoId = $this->productos[$index]['id'];
-        $producto = productos::find($productoId);
-        $producto->porcentaje_ganacia_tienda = $this->productos[$index]['porcentaje_ganacia_tienda'];
-        $producto->save();
-        $this->productos = HelpersInventario::calculo_productos(productos::all());
-        //session()->flash('success', 'Porcentaje de ganancia actualizado exitosamente.');
-        $this->emit('mostrarok', "Porcentaje de ganancia actualizado exitosamente.");
+        $producto = Productos::find($productoId); // Asegúrate de que el modelo sea correcto
+        if ($producto) {
+            $producto->porcentaje_ganacia_tienda = $this->productos2[$index]['porcentaje_ganacia_tienda'];
+            $producto->save();
+            $this->productos = HelpersInventario::calculo_productos(productos::all());
+            //session()->flash('success', 'Porcentaje de ganancia actualizado exitosamente.');
+            $this->emit('mostrarok', "Porcentaje de ganancia actualizado exitosamente.");
+        } else {
+            $this->emit('mostrarError', "Producto no encontrado.");
+        }
     }
 
     public function render()

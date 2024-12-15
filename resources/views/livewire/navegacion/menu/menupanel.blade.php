@@ -48,6 +48,10 @@
                                      <a href="{{ route('cuadre.index') }}">Cuadre</a>
 
                                  </li>
+                                 <li>
+                                     <a href=""></a>
+
+                                 </li>
                              </ul>
                          </li>
 
