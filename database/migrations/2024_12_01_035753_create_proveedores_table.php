@@ -17,6 +17,7 @@ class CreateProveedoresTable extends Migration
             $table->id();
             $table->string('nombre', 100);
             $table->string('contacto');
+            $table->string('sitio_web')->nullable();
             $table->string('estado');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

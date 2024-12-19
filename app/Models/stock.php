@@ -13,5 +13,5 @@ class stock extends Model
     }
     use HasFactory;
 
-    protected $fillable = ['producto_id', 'cantidad', 'ubicacion', 'fecha_entrada', 'fecha_salida', 'estado'];
+    protected $fillable = ['producto_id', 'cantidad', 'ubicacion', 'ubicacion2', 'fecha_entrada', 'fecha_salida', 'estado'];
 }

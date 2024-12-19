@@ -1,5 +1,5 @@
 <div class="container mt-5">
-    <h2 class="mb-4">Dashboard de Estadísticas</h2>
+    <h2 class="mb-4">Metodos de pago hoy</h2>
 
     <div class="card shadow-sm mb-4">
         <div class="card-body">

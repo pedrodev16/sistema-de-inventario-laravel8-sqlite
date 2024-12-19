@@ -19,6 +19,12 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        @if (count($stock) == 0)
+                            <tr>
+                                <td colspan="7">No hay registros</td>
+                            </tr>
+                        @endif
                         @foreach ($stock as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>

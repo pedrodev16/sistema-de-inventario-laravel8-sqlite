@@ -13,6 +13,7 @@ class FormularioProveedor extends Component
 
     public $proveedorId;
     public $nombre;
+    public $sitio_web;
     public $contacto;
     public $estado = 'on';
     public $userId;
@@ -20,6 +21,7 @@ class FormularioProveedor extends Component
     protected $rules = [
         'nombre' => 'required|min:3|max:60',
         'contacto' => 'required|min:3|max:60',
+        'sitio_web' => 'nullable|url',
     ];
 
     protected $listeners = ['editarProveedor' => 'cargarProveedor'];
@@ -36,6 +38,7 @@ class FormularioProveedor extends Component
         $this->nombre = $proveedor->nombre;
         $this->contacto = $proveedor->contacto;
         $this->estado = $proveedor->estado;
+        $this->sitio_web = $proveedor->sitio_web;
     }
 
     public function save()
@@ -43,6 +46,7 @@ class FormularioProveedor extends Component
         $data = $this->validate([
             'nombre' => 'required|min:3|max:60',
             'contacto' => 'required|min:3|max:60',
+            'sitio_web' => 'nullable|url',
         ]);
 
         if ($this->proveedorId) {
@@ -51,6 +55,7 @@ class FormularioProveedor extends Component
             $proveedor->update([
                 'nombre' => $this->nombre,
                 'contacto' => $this->contacto,
+                'sitio_web' => $this->sitio_web,
                 'estado' => $this->estado,
                 'user_id' => $this->userId,
             ]);
@@ -60,6 +65,7 @@ class FormularioProveedor extends Component
             proveedores::create([
                 'nombre' => $this->nombre,
                 'contacto' => $this->contacto,
+                'sitio_web' => $this->sitio_web,
                 'estado' => $this->estado,
                 'user_id' => $this->userId,
             ]);

@@ -19,6 +19,7 @@ class CreateStocksTable extends Migration
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade');
             $table->integer('cantidad');
             $table->string('ubicacion')->nullable();
+            $table->string('ubicacion2')->nullable();
             $table->date('fecha_entrada')->nullable();
             $table->date('fecha_salida')->nullable();
             $table->string('estado')->default('disponible');

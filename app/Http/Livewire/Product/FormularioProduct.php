@@ -33,7 +33,7 @@ class FormularioProduct extends Component
     protected $rules = [
         'nombre' => 'required|min:3|max:50',
         'descripcion' => 'required|string',
-        'nuevaImagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'nuevaImagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|',
         'costo' => 'required|numeric',
         'porcentaje_ganacia_tienda' => 'required|numeric|min:0|max:100',
         'proveedor' => 'required',
@@ -71,7 +71,7 @@ class FormularioProduct extends Component
         $data = $this->validate([
             'nombre' => 'required|min:3|max:50',
             'descripcion' => 'required|string',
-            'nuevaImagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nuevaImagen' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'costo' => 'required|numeric',
             'porcentaje_ganacia_tienda' => 'required|numeric|min:0|max:100',
             'proveedor' => 'required',

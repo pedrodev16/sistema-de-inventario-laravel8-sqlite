@@ -154,3 +154,4 @@ Route::get('/salir', [LoginController::class, 'salir'])->name('login.salir');
 Route::get('/reporte', [report::class, 'generarPDF'])->name('reporte.pdf');
 Route::get('/reportev/{id}', [report::class, 'reporteventa'])->name('reporte.venta');
 Route::post('/reportev', [report::class, 'reporteventa_filtros'])->name('reporte.ventafiltro');
+Route::post('/catalagop', [report::class, 'catalago_de_productos'])->name('catalagop');

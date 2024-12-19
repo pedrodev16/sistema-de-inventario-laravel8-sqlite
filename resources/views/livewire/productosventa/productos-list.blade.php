@@ -16,8 +16,8 @@
                     <label for="categoria" class="form-label">Categoría:</label>
                     <select id="categoria" wire:model="categoria" class="form-select">
                         <option value="">Seleccione Categoría</option>
-                        @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                        @foreach ($categorias as $categoriaa)
+                            <option value="{{ $categoriaa->id }}">{{ $categoriaa->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -25,15 +25,27 @@
                     <label for="marca" class="form-label">Marca:</label>
                     <select id="marca" wire:model="marca" class="form-select">
                         <option value="">Seleccione Marca</option>
-                        @foreach ($marcas as $marca)
-                            <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
+                        @foreach ($marcas as $marcaa)
+                            <option value="{{ $marcaa->id }}">{{ $marcaa->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
+
             </div>
+
         </div>
     </div>
+    <form action="{{ route('catalagop') }}" method="post">
+        @csrf
+        <input hidden type="text" name="" value="{{ $nombre }}">
+        <input hidden type="text" name="" value="{{ $categoria }}">
+        <input hidden type="text" name="" value="{{ $marca }}">
+        <input hidden type="text" name="" value="{{ $codigo }}">
+        <button type="submit" class="btn btn-primary">
+            catalogo de productos en PDF
+        </button>
 
+    </form>
     <div class="card">
         <div class="card-body">
             <h2>Lista de Productos</h2>
@@ -65,7 +77,9 @@
                                     <strong>Ganancia Tienda:</strong> {{ $producto->porcentaje_ganacia_tienda }}%<br>
                                     <strong>Mercado Libre:</strong> {{ $producto->mercad_l }}$<br>
                                     <strong>IVA:</strong> {{ $producto->iva }}$<br>
-                                    <strong>Stock:</strong> {{ $producto->stock->cantidad }}
+                                    <strong>Stock:</strong> {{ $producto->stock->cantidad }}<br>
+                                    <strong>ub-tienda:</strong> {{ $producto->stock->ubicacion }},
+                                    <strong>ub-almacén :</strong> {{ $producto->stock->ubicacion2 }}
                                 </p>
                                 <hr>
                                 <p>{{ $producto->descripcion }}</p>

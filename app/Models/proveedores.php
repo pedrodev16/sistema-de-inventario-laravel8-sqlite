@@ -18,6 +18,7 @@ class proveedores extends Model
     protected $fillable = [
         'nombre',
         'contacto',
+        'sitio_web',
         'estado',
         'user_id',
 

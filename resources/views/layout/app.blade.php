@@ -109,7 +109,7 @@
 
 
 
-                            <li class="dropdown">
+                            {{-- <li class="dropdown">
                                 <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
                                 <div class="dropdown-menu notify-box nt-enveloper-box">
                                     <span class="notify-title">You have 3 new notifications <a href="#">view
@@ -190,7 +190,7 @@
                             </li>
                             <li class="settings-btn">
                                 <i class="ti-settings"></i>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -256,7 +256,7 @@
     </div>
     {{-- _--------------------------------------------- --}}
     <!-- offset area start -->
-    <div class="offset-area">
+    {{-- <div class="offset-area">
         <div class="offset-close"><i class="ti-close"></i></div>
         <ul class="nav offset-menu-tab">
             <li><a class="active" data-toggle="tab" href="#activity">Activity</a></li>
@@ -431,7 +431,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @livewireScripts
     @yield('scripts')

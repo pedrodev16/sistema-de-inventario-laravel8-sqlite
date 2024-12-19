@@ -24,6 +24,15 @@
                         @enderror
                     </div>
 
+                    <div class="mb-3">
+                        <label for="sitio_web" class="form-label">Sitio web</label>
+                        <input type="text" class="form-control" id="sitio_web" wire:model="sitio_web">
+                        @error('sitio_web')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
                     <button type="submit"
                         class="btn btn-primary">{{ $proveedorId ? 'Actualizar Proveedor' : 'Registrar Proveedor' }}</button>
                 </form>

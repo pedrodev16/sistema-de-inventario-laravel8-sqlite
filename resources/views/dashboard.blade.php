@@ -8,7 +8,7 @@
     Nivel {{ $user->tipoAdmin->tipo }} --}}
 
 
-    <a href="{{ route('reporte.pdf') }}">imprimir</a>
+
     <div class="row">
 
 
@@ -25,13 +25,13 @@
             <div class="card">
 
 
-                <div class="seo-fact sbg1">
+                {{-- <div class="seo-fact sbg1">
                     <div class="p-4 d-flex justify-content-between align-items-center">
                         <div class="seofct-icon">PRODUCTOS ACTIVOS </div>
                         <h2>2</h2>
                     </div>
 
-                </div>
+                </div> --}}
             </div>
         </div>
 

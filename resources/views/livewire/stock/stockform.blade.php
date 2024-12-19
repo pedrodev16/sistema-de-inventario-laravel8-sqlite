@@ -15,12 +15,22 @@
 
 
                 <div class="mb-3">
-                    <label for="ubicacion" class="form-label">Ubicación</label>
+                    <label for="ubicacion" class="form-label">Ubicación tienda</label>
                     <input type="text" class="form-control" id="ubicacion" wire:model="ubicacion">
                     @error('ubicacion')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="mb-3">
+                    <label for="ubicacion2" class="form-label">Ubicación almacén </label>
+                    <input type="text" class="form-control" id="ubicacion2" wire:model="ubicacion2">
+                    @error('ubicacion2')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
                 @if ($stockId)
                     <button type="submit" class="btn btn-primary">Actualizar Stock</button>
                 @endif
