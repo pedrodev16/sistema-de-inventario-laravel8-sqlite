@@ -38,6 +38,7 @@ class HelpersInventario
             $producto->mercad_l = $merc_l;
             $producto->g_tienda = $p_venta;
 
+            $producto->ganancia = $p_venta;
             $total  = (float) ($producto->costo + $iva + $p_venta + $merc_l);
             $producto->costo_venta_usd = $total;
             $producto->costo_venta_bs = number_format(self::convertir($total), 2, ',', '.');
@@ -65,6 +66,7 @@ class HelpersInventario
         $producto->g_tienda = $p_venta;
 
         $total = (float) ($producto->costo + $iva + $p_venta + $merc_l);
+        $producto->ganancia = $p_venta;
         $producto->costo_venta_usd = $total;
         $producto->costo_venta_bs = number_format(self::convertir($total), 2, ',', '.');
 

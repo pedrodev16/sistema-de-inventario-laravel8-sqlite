@@ -74,9 +74,12 @@
                                 <h4 class="mb-3">{{ $producto->nombre }}</h4>
                                 <p>
                                     <strong>Precio:</strong> {{ $producto->costo }}$<br>
-                                    <strong>Ganancia Tienda:</strong> {{ $producto->porcentaje_ganacia_tienda }}%<br>
-                                    <strong>Mercado Libre:</strong> {{ $producto->mercad_l }}$<br>
-                                    <strong>IVA:</strong> {{ $producto->iva }}$<br>
+                                    <strong>Ganancia Tienda:</strong> {{ $producto->porcentaje_ganacia_tienda }}%:
+                                    {{ $producto->ganancia }}<br>
+                                    <strong>Mercado Libre:</strong> {{ $empresa[0]->porcentaje_mercadolibre }}%:
+                                    {{ $producto->mercad_l }}$<br>
+                                    <strong>IVA:</strong> {{ $empresa[0]->porcentaje_iva }}%:
+                                    {{ $producto->iva }}$<br>
                                     <strong>Stock:</strong> {{ $producto->stock->cantidad }}<br>
                                     <strong>ub-tienda:</strong> {{ $producto->stock->ubicacion }},
                                     <strong>ub-almacén :</strong> {{ $producto->stock->ubicacion2 }}
