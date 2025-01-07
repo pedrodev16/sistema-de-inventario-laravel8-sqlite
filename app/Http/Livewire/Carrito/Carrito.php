@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Carrito;
 
 use App\Helpers\HelpersInventario;
+use App\Models\HistoriaStock;
+use App\Models\Operaciones;
 use App\Models\productos;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -72,6 +75,13 @@ class Carrito extends Component
             return $carry + $item['monto'];
         }, 0);
     }
+
+    public function restaDepagos()
+    {
+        $total = $this->totalCarrito - $this->calcularTotalPagado();
+        return $total;
+    }
+
 
     public function actualizarCantidad($index, $cantidad)
     {
@@ -153,6 +163,19 @@ class Carrito extends Component
 
                 $producto->stock->cantidad -= $item['cantidad'];
                 $producto->stock->save();
+
+
+                $historia = HistoriaStock::create([
+                    'Producto' => $producto->nombre,
+                    'IDProducto' => $producto->id,
+                    'cantidad' => $item['cantidad'],
+                    'tipo_movimiento' => 'Venta',
+                    'fecha' => Carbon::now(),
+                ]);
+                $operacion = Operaciones::create([
+                    'tipo' => 'Venta',
+                    'descripcion' => 'Se ha realizado una venta del producto ' . $producto->nombre . ' con la cantidad de ' . $item['cantidad'] . ' unidades.',
+                ]);
             }
 
             DB::commit();

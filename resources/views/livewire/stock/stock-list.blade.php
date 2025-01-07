@@ -33,10 +33,32 @@
                                 <td>{{ $item->cantidad }}</td>
                                 <td>{{ $item->ubicacion }}</td>
                                 <td>{{ $item->fecha_entrada }}</td>
-                                <td>{{ $item->estado }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-warning"
-                                        wire:click="editStock({{ $item->id }})">Editar</button>
+                                    <div class="alert alert-{{ $item->estado == 'disponible' ? 'success' : 'danger' }}">
+                                        {{ $item->estado }}
+                                </td>
+                                <td>
+                                    <div style="flex: 0%; display: flex;">
+                                        <!-- Agrega un div para que los botones no se vean tan juntos -->
+                                        <button class="btn btn-sm btn-warning"
+                                            wire:click="editStock({{ $item->id }})">Editar</button>
+                                        <button class="btn btn-sm btn-info"
+                                            onclick="toggleDetails({{ $item->id }})">Detalles</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+
+
+                            <tr id="details-{{ $item->id }}" style="display: none; background-color: #17a2b836;">
+                                <td colspan="7">
+                                    <!-- Aquí puedes agregar más detalles del item -->
+                                    <p>Descripción: {{ $item->productos->descripcion }}</p>
+                                    <p>Proveedor: {{ $item->productos->proveedor->nombre }}</p>
+                                    <p>Ubicación almacén: {{ $item->ubicacion2 }}</p>
+                                    <p>Ubicación tienda: {{ $item->ubicacion }}</p>
+                                    <!-- Agrega más campos según sea necesario -->
                                 </td>
                             </tr>
                         @endforeach
@@ -46,6 +68,17 @@
         </div>
     </div>
     <script>
+        function toggleDetails(id) {
+            var detailsRow = document.getElementById('details-' + id);
+            if (detailsRow.style.display === 'none') {
+                detailsRow.style.display = 'table-row';
+            } else {
+                detailsRow.style.display = 'none';
+            }
+        }
+
+
+
         $(document).ready(function() {
             $('#stockTable')
                 .DataTable({

@@ -62,63 +62,80 @@
                 </div>
             @endif
             @foreach ($productos as $index => $producto)
-                <div class="media mb-4 p-3 border rounded"
-                    style="background:{{ $producto->stock->cantidad > 0 ? '#f6f8fb' : '#d3dfe1' }};">
-                    <img style="width: 20%;" class="img-fluid mr-4 rounded"
-                        src="{{ asset(str_replace('public', 'storage', $producto->imagen)) }}"
-                        alt="Imagen de {{ $producto->nombre }}">
+                @if ($producto->stock->estado == 'disponible')
+                    <div class="media mb-4 p-3 border rounded"
+                        style="background:{{ $producto->stock->cantidad > 0 ? '#f6f8fb' : '#d3dfe1' }};">
+                        <img style="width: 20%;" class="img-fluid mr-4 rounded"
+                            src="{{ asset(str_replace('public', 'storage', $producto->imagen)) }}"
+                            alt="Imagen de {{ $producto->nombre }}">
 
-                    <div class="media-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h4 class="mb-3">{{ $producto->nombre }}</h4>
-                                <p>
-                                    <strong>Precio:</strong> {{ $producto->costo }}$<br>
-                                    <strong>Ganancia Tienda:</strong> {{ $producto->porcentaje_ganacia_tienda }}%:
-                                    {{ $producto->ganancia }}<br>
-                                    <strong>Mercado Libre:</strong> {{ $empresa[0]->porcentaje_mercadolibre }}%:
-                                    {{ $producto->mercad_l }}$<br>
-                                    <strong>IVA:</strong> {{ $empresa[0]->porcentaje_iva }}%:
-                                    {{ $producto->iva }}$<br>
-                                    <strong>Stock:</strong> {{ $producto->stock->cantidad }}<br>
-                                    <strong>ub-tienda:</strong> {{ $producto->stock->ubicacion }},
-                                    <strong>ub-almacén :</strong> {{ $producto->stock->ubicacion2 }}
-                                </p>
-                                <hr>
-                                <p>{{ $producto->descripcion }}</p>
-                                <span class="badge badge-primary">{{ $producto->categorias->nombre }}</span>
-                                <span class="badge badge-secondary">{{ $producto->marcas->nombre }}</span>
-                                <span class="badge badge-success">{{ $producto->user_m->name }}</span>
-                                <br>
-                                <code>Cod: {{ $producto->codigo }}</code>
-                            </div>
-                            <div class="col-md-4 text-right">
-                                <div class="mb-3">
-                                    <input type="text" class="form-control mb-2"
-                                        wire:model.defer="productos2.{{ $index }}.porcentaje_ganacia_tienda"
-                                        value="{{ $producto->porcentaje_ganancia_tienda }}"
-                                        placeholder="Ganancia Tienda">
-                                    <button class="btn btn-info btn-sm"
-                                        wire:click="actualizarPorcentaje({{ $index }})">Actualizar Ganancia
-                                        Tienda</button>
-                                    {{ $x }}
-                                    @error('productos2.' . $index . '.porcentaje_ganacia_tienda')
-                                        <span class="text-danger d-block mt-2">{{ $message }}</span>
-                                    @enderror
+                        <div class="media-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 class="mb-3">{{ $producto->nombre }}</h4>
+                                    <p>
+                                        <strong>Precio:</strong> {{ $producto->costo }}$<br>
+                                        <strong>Ganancia Tienda:</strong> {{ $producto->porcentaje_ganacia_tienda }}%:
+                                        {{ $producto->ganancia }}<br>
+                                        <strong>Mercado Libre:</strong> {{ $empresa[0]->porcentaje_mercadolibre }}%:
+                                        {{ $producto->mercad_l }}$<br>
+                                        <strong>IVA:</strong> {{ $empresa[0]->porcentaje_iva }}%:
+                                        {{ $producto->iva }}$<br>
+                                        <strong>Stock:</strong> {{ $producto->stock->cantidad }}<br>
+                                        <strong>ub-tienda:</strong> {{ $producto->stock->ubicacion }},
+                                        <strong>ub-almacén :</strong> {{ $producto->stock->ubicacion2 }}<br>
+
+                                    </p>
+                                    <hr>
+                                    <div style="background: #ffffff; padding: 10px; border-radius: 10px;">
+                                        <p>{{ $producto->descripcion }}</p>
+                                        <style>
+                                            .badge {
+                                                color: #fff;
+                                                height: 23px;
+                                                box-shadow: #a49eb9 0px -1px 6px 1px;
+                                                /* background-color: #6841ea; */
+                                                /* border: #df5c5c solid 1px; */
+                                                font-size: 12pt;
+                                            }
+                                        </style>
+                                        <span class="badge badge-primary">{{ $producto->categorias->nombre }}</span>
+                                        <span class="badge badge-secondary">{{ $producto->marcas->nombre }}</span>
+                                        <span class="badge badge-success">{{ $producto->user_m->name }}</span>
+                                        <span class="badge badge-warning">{{ $producto->proveedor->nombre }}</span>
+                                        <br>
+                                        <code>Cod: {{ $producto->codigo }}</code>
+                                    </div>
                                 </div>
-                                <h3>
-                                    <span class="text-primary">{{ $producto->costo_venta_usd }}$</span><br>
-                                    <small class="text-muted">{{ $producto->costo_venta_bs }}Bs</small>
-                                </h3>
-                                @if ($producto->stock->cantidad > 0)
-                                    <button class="btn btn-primary btn-sm mt-2"
-                                        wire:click="agregarAlCarrito({{ $producto->id }})">Añadir al Carrito</button>
-                                @endif
+                                <div class="col-md-4 text-right">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control mb-2"
+                                            wire:model.defer="productos2.{{ $index }}.porcentaje_ganacia_tienda"
+                                            value="{{ $producto->porcentaje_ganancia_tienda }}"
+                                            placeholder="Ganancia Tienda">
+                                        <button class="btn btn-info btn-sm"
+                                            wire:click="actualizarPorcentaje({{ $index }})">Actualizar Ganancia
+                                            Tienda</button>
+                                        {{ $x }}
+                                        @error('productos2.' . $index . '.porcentaje_ganacia_tienda')
+                                            <span class="text-danger d-block mt-2">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <h3>
+                                        <span class="text-primary">{{ $producto->costo_venta_usd }}$</span><br>
+                                        <small class="text-muted">{{ $producto->costo_venta_bs }}Bs</small>
+                                    </h3>
+                                    @if ($producto->stock->cantidad > 0)
+                                        <button class="btn btn-primary btn-sm mt-2"
+                                            wire:click="agregarAlCarrito({{ $producto->id }})">Añadir al
+                                            Carrito</button>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <hr>
+                    <hr>
+                @endif
             @endforeach
         </div>
     </div>

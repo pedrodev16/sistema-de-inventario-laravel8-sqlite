@@ -15,6 +15,12 @@ class productos extends Model
 
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function proveedor()
+    {
+
+        return $this->belongsTo(proveedores::class, 'proveedor_id');
+    }
     public function categorias()
     {
 

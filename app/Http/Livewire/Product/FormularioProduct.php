@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Product;
 
 use App\Models\Categorias;
 use App\Models\marcas;
+use App\Models\Operaciones;
 use App\Models\productos;
 use App\Models\proveedores;
 use App\Models\stock;
@@ -121,9 +122,13 @@ class FormularioProduct extends Component
             stock::create([
                 'producto_id' => $producto->id,
                 'cantidad' => 0,
-                'estado' => 'disponible'
+                'estado' => 'oculto',
             ]);
-
+            //operacion
+            $operacion = Operaciones::create([
+                'tipo' => 'Entrada',
+                'descripcion' => 'Se ha registrado un nuevo producto ' . $producto->nombre . ' con el código ' . $producto->codigo . '.',
+            ]);
             session()->flash('success', 'Producto registrado exitosamente.');
         }
 

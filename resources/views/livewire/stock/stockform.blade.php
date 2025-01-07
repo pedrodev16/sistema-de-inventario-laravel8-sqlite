@@ -29,7 +29,16 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
+                <div class="mb-3">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-control" id="estado" wire:model="estado">
+                        <option value="disponible">Disponible</option>
+                        <option value="oculto">Oculto</option>
+                    </select>
+                    @error('estado')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 @if ($stockId)
                     <button type="submit" class="btn btn-primary">Actualizar Stock</button>

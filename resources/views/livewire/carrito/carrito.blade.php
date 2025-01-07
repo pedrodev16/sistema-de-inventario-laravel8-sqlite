@@ -79,7 +79,7 @@
                         @if ($this->calcularTotalPagado() >= $totalCarrito)
                             <button class="btn btn-primary btn-lg" wire:click="realizarVenta">Finalizar Compra</button>
                         @else
-                            {{ $totalCarrito - $this->calcularTotalPagado() }}$
+                            {{ $this->restaDepagos() }}$
                             <div class="alert alert-warning" role="alert">
                                 Añade más métodos de pago para completar el total. </div>
                         @endif
