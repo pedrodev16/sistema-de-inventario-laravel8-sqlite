@@ -265,18 +265,12 @@
         <div class="offset-content tab-content">
             <div id="activity" class="tab-pane fade in show active">
                 <div class="recent-activity">
+                    @livewire('application-history')
                     <div class="timeline-task">
-                        <div class="icon bg1">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                        <div class="tm-title">
-                            <h4>Rashed sent you an email</h4>
-                            <span class="time"><i class="ti-time"></i>09:35</span>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
-                        </p>
-                    </div>
-                    <div class="timeline-task">
+
+
+
+
                         <div class="icon bg2">
                             <i class="fa fa-check"></i>
                         </div>
