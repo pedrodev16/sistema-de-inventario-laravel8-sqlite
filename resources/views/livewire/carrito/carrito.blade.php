@@ -35,8 +35,17 @@
                                         wire:model.lazy="carrito.{{ $index }}.cantidad"
                                         wire:change="actualizarCantidad({{ $index }}, $event.target.value)">
                                 </td>
-                                <td>{{ $item['precio'] }}$ (Proveedor: {{ $item['precio_proveedor'] }}$)</td>
-                                <td>{{ $item['subtotal'] }}$ (Proveedor: {{ $item['subtotal_proveedor'] }}$)</td>
+                                <td>
+                                    <h4 style="color: #9fa0a3"><strong
+                                            style="color: #0a0a0a">{{ $item['precio'] }}$</strong>
+                                        ({{ $this->convertir_a_bs($item['precio']) }} BS)
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4 style="color: #9fa0a3"><strong
+                                            style="color: #0a0a0a">{{ $item['subtotal'] }}$</strong>
+                                        ({{ $this->convertir_a_bs($item['subtotal']) }} BS)</h4>
+                                </td>
                                 <td>
                                     <button class="btn btn-danger btn-sm"
                                         wire:click="eliminarProductoDelCarrito({{ $index }})">Eliminar</button>
@@ -46,13 +55,30 @@
                     </tbody>
                 </table>
 
-                <div class="row justify-content-center align-items-center g-4 mt-4">
+                <div style="background: rgb(238, 248, 248)"
+                    class="row justify-content-center align-items-center g-4 mt-4">
                     <div class="col-md-4">
-                        <h4 class="mb-3">Total del Carrito: {{ number_format($totalCarrito, 2, ',', '.') }}$</h4>
-                        <h4 class="mb-3"> {{ number_format($totalbs, 2, ',', '.') }} Bs</h4>
+                        <style>
+                            .total-dolares {
+                                color: green;
+                                font-weight: bold;
+                            }
+
+                            .total-bolivares {
+                                color: blue;
+                                font-weight: bold;
+                            }
+                        </style>
+
+                        <h4 class="text-center">Total del Carrito:
+                        </h4>
+                        <h4 class="total-dolares mb-3">
+                            {{ number_format($totalCarrito, 2, ',', '.') }}$
+                        </h4>
+                        <h4 class="total-bolivares mb-3">{{ $this->convertir_a_bs($totalCarrito) }} Bs</h4>
 
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="background: #d3dcef;box-shadow: inset #5d5859 -1px 0px 20px;">
                         <h3 class="mb-3">Métodos de Pago</h3>
                         <div class="mb-3">
                             @foreach ($metodosPago as $metodo)
@@ -60,6 +86,7 @@
                             @endforeach
                         </div>
                         <div class="mb-3">
+                            <caption>Seleccione un método de pago y luego ingrese el monto pagado.</caption>
                             <select wire:model="metodoPago" class="form-select form-control mb-2">
                                 <option value="" selected>Seleccione un Método de Pago</option>
                                 <option value="pagomovil">Pago Móvil</option>
@@ -70,16 +97,18 @@
                                 <option value="paypal">Paypal</option>
                                 <option value="zelle">Zelle</option>
                             </select>
-                            <input type="number" wire:model="montoPago" placeholder="Monto Pagado"
+                            <caption>Ingrese el monto pagado en usd.</caption>
+                            <input type="number" wire:model="montoPago" placeholder="Monto Pagado en USD"
                                 class="form-control">
                         </div>
-                        <button class="btn btn-success" wire:click="agregarMetodoPago">Agregar Método de Pago</button>
+                        <button class="btn btn-success" wire:click="agregarMetodoPago">Agregar Pago</button>
                     </div>
                     <div class="col-md-4 text-center">
                         @if ($this->calcularTotalPagado() >= $totalCarrito)
                             <button class="btn btn-primary btn-lg" wire:click="realizarVenta">Finalizar Compra</button>
                         @else
-                            {{ $this->restaDepagos() }}$
+                            <h2 class="total-dolares"> {{ $this->restaDepagos() }}$ </h2>
+                            <h2 class="total-bolivares"> {{ $this->convertir_a_bs($this->restaDepagos()) }} BS </h2>
                             <div class="alert alert-warning" role="alert">
                                 Añade más métodos de pago para completar el total. </div>
                         @endif

@@ -92,6 +92,10 @@ class Cuadre extends Component
         $this->cuadres = ModelsCuadre::all()->toArray();
     }
 
+    public function conbertir_a_bs($monto)
+    {
+        return HelpersInventario::convertir($monto);
+    }
 
 
 

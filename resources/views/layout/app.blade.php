@@ -243,7 +243,7 @@
 
 
 
-
+        @livewire('currency-converter')
         <!-- footer area start-->
         <footer>
             <div class="footer-area">

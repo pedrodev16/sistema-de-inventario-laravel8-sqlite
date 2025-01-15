@@ -204,9 +204,15 @@ class Carrito extends Component
             return $carry + $item['subtotal_proveedor'];
         }, 0);
     }
+
+    public function convertir_a_bs($monto)
+    {
+        return number_format(HelpersInventario::convertir($monto), 2, ',', '.');
+    }
+
     public function render()
     {
-        $this->totalbs = HelpersInventario::convertir($this->totalCarrito);
+        //$this->totalbs = HelpersInventario::convertir($this->totalCarrito);
         return view('livewire.carrito.carrito');
     }
 }

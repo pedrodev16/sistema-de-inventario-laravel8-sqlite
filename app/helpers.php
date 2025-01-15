@@ -18,6 +18,16 @@ class HelpersInventario
         return $cost * $precioDolar;
     }
 
+    public static function convertir_BS($cost)
+    {
+        $empresa = Empresa::first();
+        if (!$empresa) {
+            throw new \Exception('No se ha encontrado ninguna empresa registrada.');
+        }
+        $precioDolar = (float) $empresa->precio_dolar;
+        return round($cost / $precioDolar, 2); // Limiting to 2 decimal places
+    }
+
     public static function calculo_productos(Collection $productos)
     {
         $empresa = Empresa::first();

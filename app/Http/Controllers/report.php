@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\HelpersInventario;
+use App\Models\Empresa;
 use App\Models\productos;
 use App\Models\stock;
 use App\Models\Venta;
@@ -79,6 +80,7 @@ class report extends Controller
         $this->nombre = $request->categoria;
         $this->cod = $request->categoria;
 
+        $empresa = Empresa::where('id', 1)->get();
         $query = productos::query();
         if ($this->cod) {
             $query->where('codigo', 'like', '%' . $this->cod . '%');
@@ -94,7 +96,7 @@ class report extends Controller
         }
         $this->productos = HelpersInventario::calculo_productos($query->get());
         $productos = $this->productos;
-        $pdf = FacadePdf::loadView('reportes.catalagop', compact('productos'));
-        return $pdf->download('reporte.pdf');
+        $pdf = FacadePdf::loadView('reportes.catalagop', compact('productos', 'empresa'));
+        return $pdf->download('catalogo_de_productos.pdf');
     }
 }

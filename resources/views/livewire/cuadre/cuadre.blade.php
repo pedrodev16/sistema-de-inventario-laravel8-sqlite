@@ -50,21 +50,80 @@
             <div class="card-body">
 
 
-                <h3>Ventas del día</h3>
+                <h3 class="text-center">Ventas del día</h3>
                 <div class="row">
                     <div class="col" style="background: #c5d9e0;border:#6ec7e7 solid 1px">
                         <!-- Totales por Método de Pago -->
                         <h5>Totales por Método de Pago</h5>
 
 
-                        <ul class="list-group">
-                            @foreach ($totalesMetodosPago as $metodo => $total)
-                                @if ($total > 0)
-                                    <li> <strong>{{ ucfirst(str_replace('_', ' ', $metodo)) }}:</strong>
-                                        {{ number_format($total, 2, ',', '.') }}$ </li>
-                                @endif
-                            @endforeach
-                        </ul>
+                        <style>
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin: 20px 0;
+                                font-size: 18px;
+                                text-align: left;
+                            }
+
+                            th,
+                            td {
+                                padding: 12px;
+                                border-bottom: 1px solid #ddd;
+                            }
+
+                            th {
+                                background-color: #f2f2f2;
+                            }
+
+                            tr:hover {
+                                background-color: #f5f5f5;
+                            }
+
+                            .right-align {
+                                text-align: right;
+                            }
+                        </style>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Método de Pago</th>
+                                    <th class="right-align">Total ($)</th>
+                                    <th class="right-align">Total (BS)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($totalesMetodosPago as $metodo => $total)
+                                    @if ($total > 0)
+                                        @php
+                                            $monto = '';
+                                        @endphp
+                                        @if (in_array($metodo, ['efectivobs', 'pagomovil', 'punto_de_venta', 'transferencias']))
+                                            @php
+                                                $monto = $this->conbertir_a_bs($total) . ' BS';
+                                            @endphp
+                                        @endif
+                                        <tr>
+                                            <td>{{ ucfirst(str_replace('_', ' ', $metodo)) }}</td>
+                                            <td class="right-align">{{ number_format($total, 2, ',', '.') }}$</td>
+                                            <td class="right-align">{{ $monto }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                <tr>
+
+                                    <td><strong>Total</strong></td>
+                                    <td class="right-align">
+                                        <strong>{{ number_format($totalGananciapordia, 2, ',', '.') }}$</strong>
+                                    </td>
+                                    <td class="right-align">
+                                        <strong>{{ number_format($this->conbertir_a_bs($totalGananciapordia), 2, ',', '.') }}
+                                            BS</strong></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
 
                     </div>
                     <div class="col" style="background: #d1dee2;border:#6ec7e7 solid 1px">
@@ -83,7 +142,7 @@
 
 
 
-                {{ $totalGananciapordia }}
+
                 <div>
                     @foreach ($ventasDelDia as $venta)
                         <div class="card mb-3">
