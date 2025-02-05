@@ -15,7 +15,7 @@
                          <a href="{{ route('dashboard') }}"><i class="ti-dashboard"></i><span>dashboard</span></a>
 
                      </li>
-                     @if (Auth::user()->hasRole('medio') || Auth::user()->hasRole('alto'))
+                     @if (Auth::user()->hasRole('vendedor') || Auth::user()->hasRole('Admin'))
                          <li class="active">
                              <a href="{{ route('productos.index') }}"><i
                                      class="ti-package"></i><span>Productos</span></a>
@@ -28,7 +28,7 @@
                              <a href="{{ route('ventas.index') }}"><i class="ti-agenda"></i><span>Ventas</span></a>
                          </li>
                      @endif
-                     @if (Auth::user()->hasRole('alto'))
+                     @if (Auth::user()->hasRole('Admin'))
                          <li>
 
 

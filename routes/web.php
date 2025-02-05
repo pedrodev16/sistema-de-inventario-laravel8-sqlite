@@ -48,36 +48,36 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
 
         return view('dashboard');
-    })->name('dashboard');;
+    })->name('dashboard');
 
 
     Route::get('/home', function () {
         return view('dashboard');
-    })->name('dashboard');;
+    })->name('dashboard');
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');;
+    })->name('dashboard');
 
 
     Route::get('/usuarios', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('usuarios.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
-    })->name('usuarios.index');;
+    })->name('usuarios.index');
 
 
 
     Route::get('/stock', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('stock.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('stock.index');;
 
     Route::get('/productos', function () {
-        if (Auth::user()->hasRole('medio') || Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('vendedor') || Auth::user()->hasRole('Admin')) {
             return view('productosventas.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
@@ -85,63 +85,63 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/carrito', function () {
-        if (Auth::user()->hasRole('medio') || Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('vendedor') || Auth::user()->hasRole('Admin')) {
             return view('carrito.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('carrito.index');;
 
     Route::get('/perfilempresa', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('empresa.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('empresa.index');;
 
     Route::get('/ventas', function () {
-        if (Auth::user()->hasRole('medio') || Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('vendedor') || Auth::user()->hasRole('Admin')) {
             return view('ventas.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('ventas.index');
 
     Route::get('/cuadre', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('cuadre.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('cuadre.index');
 
     Route::get('/historiacuadre', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('cuadre.HistoriaCuadre');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('cuadre.hostoria');
 
     Route::get('/categorias', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('categorias.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('categorias.index');
 
     Route::get('/proveedor', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('proveedor.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('proveedor.index');
 
     Route::get('/marcas', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('marcas.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado
     })->name('marcas.index');
 
     Route::get('/producto', function () {
-        if (Auth::user()->hasRole('alto')) {
+        if (Auth::user()->hasRole('Admin')) {
             return view('productos.index');
         }
         return redirect('/'); // Redirigir a página de acceso denegado

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -11,6 +12,7 @@ class LoginController extends Controller
 {
     public function index(){
 
+
         return view('auth.login');
        }
 
@@ -18,6 +20,7 @@ class LoginController extends Controller
        public function login(){
 
         return view('auth.login');
+
        }
 
        public function store(Request $request)
@@ -26,7 +29,7 @@ class LoginController extends Controller
                'email' => 'required|email',
                'password' => 'required',
            ]);
-   
+
            if (Auth::attempt($credentials)) {
                return redirect()->intended('/dashboard'); // Redirige al dashboard si las credenciales son válidas
            } else {
@@ -35,7 +38,7 @@ class LoginController extends Controller
                ]);
            }
        }
-   
+
        public function salir()
        {
            Auth::logout();
