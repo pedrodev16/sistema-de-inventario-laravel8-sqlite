@@ -3,20 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Venta;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 class dashboard extends Controller
 {
-  public function index()
-  {
-    $user = Auth::user();
+    public function index()
+    {
 
-    // Prueba rápida en tu controlador para ver si la relación está funcionando
-    // $use = User::with('tipoAdmin')->find(Auth::id());
-    // dd($use->toArray());
+        $fechaActual = Carbon::now();
+        $hoy = [
+            'dia' => $fechaActual->day,
+            'mes' => $fechaActual->month,
+            'ano' => $fechaActual->year
+        ];
 
-    return view('dashboard', compact('user'));
-  }
+
+        $ventasdeldia = Venta::ventasDelDia();
+        $totalventas = Venta::totalVentasDelDia();
+        $ganancias = Venta::gananciasDelDia();
+        return view('dashboard', compact(['ventasdeldia', 'totalventas', 'ganancias', 'hoy']));
+    }
 }

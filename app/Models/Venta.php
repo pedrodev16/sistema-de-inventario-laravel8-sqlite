@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,5 +31,22 @@ class Venta extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    // Función para obtener las ventas del día
+    public static function ventasDelDia()
+    {
+        return self::whereDate('created_at', Carbon::today())->count();
+    }
+
+
+
+    public static function totalVentasDelDia()
+    {
+        return self::whereDate('created_at', Carbon::today())->sum('total');
+    }
+
+    public static function gananciasDelDia()
+    {
+        return self::whereDate('created_at', Carbon::today())->sum('ganancia');
     }
 }

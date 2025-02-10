@@ -13,6 +13,7 @@ use App\Http\Controllers\report;
 use App\Http\Controllers\stock;
 use App\Http\Controllers\Usuarios;
 use App\Models\User;
+use App\Models\Venta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -44,20 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/salir', [LoginController::class, 'salir'])->name('login.salir');
 
 
-
-    Route::get('/', function () {
-
-        return view('dashboard');
-    })->name('dashboard');
-
-
-    Route::get('/home', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    //dashboard
+    Route::get('/', [dashboard::class, 'index'])->name('dashboard');
+    Route::get('/home', [dashboard::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [dashboard::class, 'index'])->name('dashboard');
 
 
     Route::get('/usuarios', function () {
