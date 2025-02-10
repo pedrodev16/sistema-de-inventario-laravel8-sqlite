@@ -77,23 +77,87 @@
                             </div>
                         </div>
                     </div>
-
+<hr>
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="chart">
                                 <h5>Productos con stock mínimo</h5>
                                 <!-- Aquí puedes añadir un gráfico usando librerías como Chart.js -->
+
+
+
+  @foreach ($bajostock as $stock)
+                    <a href="#" class="notify-item">
+                        <div class="notify-thumb">
+
+                            <img src="{{ asset(str_replace('public', 'storage', $stock->productos->imagen)) }}"
+                                alt="image">
+
+                        </div>
+                        <div class="notify-text">
+
+                            @if ($stock->cantidad > 0)
+                                <div class="alert alert-warning">
+                                    <p>El producto <strong>{{ $stock->productos->nombre }}</strong> tiene una cantidad
+                                        baja:
+                                        <strong>{{ $stock->cantidad }}</strong>
+                                    </p>
+                                </div>
+                            @else
+                                <div class="alert alert-danger">
+                                    <p>El producto <strong>{{ $stock->productos->nombre }}</strong>
+                                        esta agotado
+                                        <strong>agotado</strong>
+                                    </p>
+                                </div>
+                            @endif
+
+
+                        </div>
+                    </a>
+                @endforeach
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                         </div>
+                       
                         <div class="col-md-6">
                             <div class="chart">
-                                <h5>Productos más vendidos</h5>
+                                <h5>Los 20 Productos más vendidos</h5>
                                 <!-- Aquí puedes añadir un gráfico usando librerías como Chart.js -->
+
+                                @foreach ($masvendidos as $producto)
+                                    <a href="#" class="notify-item">
+                                        <div class="notify-thumb">
+
+                                            <img src="{{ asset(str_replace('public', 'storage', $producto->producto->imagen)) }}"
+                                                alt="image">
+
+                                        </div>
+                                        <div class="notify-text">
+                                            <div class="alert alert-success">
+                                                <p>El producto <strong>{{ $producto->producto->nombre }}</strong> ha sido vendido
+                                                    <strong>{{ $producto->total_cantidad }}</strong> veces
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
                 </div>
-
+<hr>
     <div class="row">
 
 

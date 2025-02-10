@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class VentaDetalle extends Model
 {
@@ -16,5 +17,14 @@ class VentaDetalle extends Model
     public function producto()
     {
         return $this->belongsTo(productos::class);
+    }
+
+    public static function productosMasVendidos()
+    {
+        return self::select('producto_id', DB::raw('SUM(cantidad) as total_cantidad'))
+        ->groupBy('producto_id')
+        ->orderBy('total_cantidad', 'desc')
+        ->take(20)
+            ->get();
     }
 }

@@ -15,4 +15,10 @@ class stock extends Model
     use HasFactory;
 
     protected $fillable = ['producto_id', 'cantidad', 'ubicacion', 'ubicacion2', 'fecha_entrada', 'fecha_salida', 'estado'];
+
+
+    public static function bajostock()
+    {
+        return self::where('cantidad', '<', 10)->get();
+    }
 }
