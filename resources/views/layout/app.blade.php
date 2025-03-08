@@ -109,7 +109,7 @@
 
 
 
-                            <li class="dropdown">
+                            {{-- <li class="dropdown">
                                 <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
                                 <div class="dropdown-menu notify-box nt-enveloper-box">
                                     <span class="notify-title">You have 3 new notifications <a href="#">view
@@ -188,6 +188,12 @@
                                     </div>
                                 </div>
                             </li>
+ --}}
+
+
+
+
+
                             <li class="settings-btn">
                                 <i class="ti-settings"></i>
                             </li>
@@ -216,7 +222,7 @@
                             </h4>
                             <div class="dropdown-menu">
 
-                                <a class="dropdown-item" href="#">Configuración</a>
+                                {{-- <a class="dropdown-item" href="#">Configuración</a> --}}
                                 <a class="dropdown-item" href="{{ route('login.salir') }}">Salir</a>
                             </div>
                         </div>
@@ -260,13 +266,13 @@
         <div class="offset-close"><i class="ti-close"></i></div>
         <ul class="nav offset-menu-tab">
             <li><a class="active" data-toggle="tab" href="#activity">Activity</a></li>
-            <li><a data-toggle="tab" href="#settings">Settings</a></li>
+            {{-- <li><a data-toggle="tab" href="#settings">Settings</a></li> --}}
         </ul>
         <div class="offset-content tab-content">
             <div id="activity" class="tab-pane fade in show active">
                 <div class="recent-activity">
                     @livewire('application-history')
-                    <div class="timeline-task">
+                    {{-- <div class="timeline-task">
 
 
 
@@ -275,7 +281,7 @@
                             <i class="fa fa-check"></i>
                         </div>
                         <div class="tm-title">
-                            <h4>Added</h4>
+                            <h4>Addedookok</h4>
                             <span class="time"><i class="ti-time"></i>7 Minutes Ago</span>
                         </div>
                         <p>Lorem ipsum dolor sit amet consectetur.
@@ -364,10 +370,10 @@
                         </div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
                         </p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
-            <div id="settings" class="tab-pane fade">
+            {{-- <div id="settings" class="tab-pane fade">
                 <div class="offset-settings">
                     <h4>General Settings</h4>
                     <div class="settings-list">
@@ -423,7 +429,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

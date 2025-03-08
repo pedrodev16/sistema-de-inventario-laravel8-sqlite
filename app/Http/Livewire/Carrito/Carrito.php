@@ -61,6 +61,15 @@ class Carrito extends Component
 
     public function agregarMetodoPago()
     {
+
+        foreach ($this->metodosPago as $metodoExistente) {
+            if ($metodoExistente['metodo'] === $this->metodoPago) {
+                $this->emit('mostrarError', " Ya existe un método de pago igual.");
+                // Ya existe un método de pago igual
+                return;
+            }
+        }
+
         $this->metodosPago[] = [
             'metodo' => $this->metodoPago,
             'monto' => $this->montoPago
@@ -87,7 +96,7 @@ class Carrito extends Component
     {
         $producto = productos::findOrFail($this->carrito[$index]['producto_id']);
 
-        // Verificar si la cantidad no excede el stock disponible 
+        // Verificar si la cantidad no excede el stock disponible
         if ($cantidad > $producto->stock->cantidad) {
             $this->emit('mostrarError', "No se puede añadir más de la cantidad disponible en stock.");
 

@@ -1,5 +1,5 @@
 <div>
-    <h2>Historial de Aplicaciones</h2>
+    <h2>Historial de Actividades</h2>
 
     @foreach ($historia as $application)
         <div class="timeline-task">

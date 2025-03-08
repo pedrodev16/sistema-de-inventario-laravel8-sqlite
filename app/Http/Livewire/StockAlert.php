@@ -12,6 +12,8 @@ class StockAlert extends Component
 
     public function mount()
     {
+
+
         $this->stocks = Stock::where('cantidad', '<', 10)->get();
     }
 

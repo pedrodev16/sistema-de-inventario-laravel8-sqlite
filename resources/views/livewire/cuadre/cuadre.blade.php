@@ -101,7 +101,7 @@
                                         @endphp
                                         @if (in_array($metodo, ['efectivobs', 'pagomovil', 'punto_de_venta', 'transferencias']))
                                             @php
-                                                $monto = $this->conbertir_a_bs($total) . ' BS';
+                                                $monto = $this->convertir_a_bs($total) . ' BS';
                                             @endphp
                                         @endif
                                         <tr>
@@ -118,7 +118,7 @@
                                         <strong>{{ number_format($totalGananciapordia, 2, ',', '.') }}$</strong>
                                     </td>
                                     <td class="right-align">
-                                        <strong>{{ number_format($this->conbertir_a_bs($totalGananciapordia), 2, ',', '.') }}
+                                        <strong>{{ number_format($this->convertir_a_bs($totalGananciapordia), 2, ',', '.') }}
                                             BS</strong></td>
 
                                 </tr>

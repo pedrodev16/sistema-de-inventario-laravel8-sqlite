@@ -1,13 +1,11 @@
 <div class="container mt-5">
     <h2>Ventas</h2>
-
     <div class="row">
         <div class="col-md-6">
             <div class="mt-3">
                 <div class="card">
-                    <div class="card-body" style="border: solid 2px #41c950;
-    border-radius: 32px;">
-                        <h3>Ventas por Mes</h3>
+                    <div class="card-body" style="border: solid 2px #41c950;border-radius: 32px;">
+                        <h3> {{ isset($ventasPorMes[0]['total'])?$ventasPorMes[0]['total']:0}} Ventas por Mes</h3>
                         <canvas id="chartVentasPorMes"></canvas>
                     </div>
                 </div>
@@ -16,9 +14,8 @@
         <div class="col-md-6">
             <div class="mt-3">
                 <div class="card">
-                    <div class="card-body" style="border: solid 2px #41c950;
-    border-radius: 32px;">
-                        <h3>Ventas por Año</h3>
+                    <div class="card-body" style="border: solid 2px #41c950;border-radius: 32px;">
+                         <h3>{{ isset($ventasPorAno[0]['total'])?$ventasPorAno[0]['total']:0}} Ventas por Año </h3>
                         <canvas id="chartVentasPorAno"></canvas>
                     </div>
                 </div>
@@ -36,13 +33,7 @@
             var ventasPorMes = @json(array_column($ventasPorMes, 'total'));
             var etiquetasMes = @json(array_column($ventasPorMes, 'mes'));
             var ventasPorAno = @json(array_column($ventasPorAno, 'total'));
-            var etiquetasAno = @json(array_column($ventasPorAno, 'ano'));
-
-
-
-
-
-
+            var etiquetasAno = @json(array_column($ventasPorAno, 'ano'))
 
             // Gráfico de Ventas por Mes
             new Chart(ctxMes, {
